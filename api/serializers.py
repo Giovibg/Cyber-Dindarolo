@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Transaction
+from .models import Product, Transaction, Budget
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -8,4 +8,9 @@ class ProductSerializer(serializers.ModelSerializer):
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('id','product', 'user', 'unit_price', 'quantity', 'currency', 'transaction_timestamp')
+        fields = ('id','product', 'unit_price', 'quantity', 'currency', 'transaction_timestamp')
+
+class BudgetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Budget
+        fields = ('id','budget')

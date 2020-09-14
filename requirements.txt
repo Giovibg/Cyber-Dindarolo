@@ -1,2 +1,4 @@
 Django==2.2
 Djangorestframework
+django-cors-headers
+djangorestframework_simplejwt

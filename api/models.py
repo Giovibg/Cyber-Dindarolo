@@ -12,16 +12,19 @@ class Product(models.Model):
         return f'{self.name}'
 
 class Transaction(models.Model):
-    product = models.ForeignKey('Product', related_name='transactions', on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)
     #user = models.ForeignKey(User, on_delete=models.CASCADE)
     unit_price = models.FloatField()
     quantity = models.IntegerField()
+    transaction_type = models.CharField(max_length=3)
     currency = models.CharField(max_length=3)
     transaction_timestamp = models.DateTimeField(auto_now_add=True)
-
+    
     class Meta:
         ordering = ['-transaction_timestamp']
 
 class Budget(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     budget = models.IntegerField(default=0)
     #user = models.ForeignKey(User, on_delete=models.CASCADE)

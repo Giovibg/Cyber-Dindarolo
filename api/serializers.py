@@ -8,7 +8,7 @@ class ProductSerializer(serializers.ModelSerializer):
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ('id','product', 'unit_price', 'quantity', 'currency', 'transaction_timestamp')
+        fields = ('id','product', 'unit_price','trans_type', 'quantity', 'currency', 'transaction_timestamp')
 
 class BudgetSerializer(serializers.ModelSerializer):
     class Meta:

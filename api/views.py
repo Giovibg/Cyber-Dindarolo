@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from .serializers import ProductSerializer, TransactionSerializer, BudgetSerializer
 from rest_framework.exceptions import  PermissionDenied
 from rest_framework import permissions
+from rest_framework.authentication import TokenAuthentication
 # Create your views here.
 
 class IsOwner(permissions.BasePermission):
@@ -18,7 +19,8 @@ class ProductViewSet(APIView):
     #Insert product if not already available
     #@action(detail=False, methods=['POST'])
     def post(self, request):
-        if 'name' in request.data:
+        product_serializer = ProductSerializer(data=request.data)
+        if product_serializer.is_valid():
             #Check if product already exists
             name = request.data['name']
             products = Product.objects.all()
@@ -26,11 +28,10 @@ class ProductViewSet(APIView):
                 if prod.name == name:
                     response = {'message': 'product already available'}
                     return Response(response, status=status.HTTP_400_BAD_REQUEST)
-            product_serializer = ProductSerializer(data=request.data)
-            if product_serializer.is_valid():
-                product_serializer.save()
-                response = {'message': 'product added'}
-                return Response(response, status=status.HTTP_201_CREATED)
+            
+            product_serializer.save()
+            response = {'message': 'product added'}
+            return Response(response, status=status.HTTP_201_CREATED)
         return Response(product_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
     #Get all products
@@ -41,6 +42,7 @@ class ProductViewSet(APIView):
 
 class TransactionViewSet(APIView):
     permission_classes = (IsOwner,)
+    #authentication_classes = (TokenAuthentication, )
     #Get all transaction list
     def get(self,request):
         user = self.request.user
@@ -58,7 +60,13 @@ class TransactionViewSet(APIView):
         if serializer.is_valid():
             serializer.save(owner=self.request.user)
             serializer.save()
-            ret = serializer.validated_data['quantity'] * serializer.validated_data['unit_price']
+            #profile = serializer.save(commit=False)
+            #profile.user = self.request.user
+            #profile.save()
+            if serializer.validated_data['trans_type'] == 'DOWN':
+                ret = -serializer.validated_data['quantity'] * serializer.validated_data['unit_price']
+            else:
+                ret = serializer.validated_data['quantity'] * serializer.validated_data['unit_price']
             print(ret)
             return Response(ret, status=status.HTTP_201_CREATED)
 

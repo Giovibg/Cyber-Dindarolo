@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('jwt_auth/', include('jwt_auth.urls'), name='jwt_auth'),
+    path('', include('frontend.urls')),
 ]

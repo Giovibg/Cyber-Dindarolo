@@ -16,6 +16,7 @@ class Transaction(models.Model):
     product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)
     unit_price = models.FloatField()
     quantity = models.IntegerField()
+    subtotal = models.FloatField(blank=True, default=0)
     trans_type = models.CharField(max_length=4, default="DOWN")
     currency = models.CharField(max_length=3)
     transaction_timestamp = models.DateTimeField(auto_now_add=True)
@@ -24,5 +25,6 @@ class Transaction(models.Model):
         ordering = ['-transaction_timestamp']
 
 class Budget(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     budget = models.IntegerField(default=0)
+

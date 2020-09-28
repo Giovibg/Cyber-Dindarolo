@@ -12,7 +12,7 @@ class Product(models.Model):
         return f'{self.name}'
 
 class Transaction(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)
     unit_price = models.FloatField()
     quantity = models.IntegerField()
@@ -25,6 +25,6 @@ class Transaction(models.Model):
         ordering = ['-transaction_timestamp']
 
 class Budget(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     budget = models.IntegerField(default=0)
 

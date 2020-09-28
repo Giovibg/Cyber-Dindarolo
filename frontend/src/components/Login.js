@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import "./Login.css"
 import { Link } from 'react-router-dom'
+import APIrequest from "../apiServices"
+
 class Login extends Component{
     constructor(props){
         super(props);
@@ -20,9 +22,32 @@ class Login extends Component{
     }
 
     handleSubmit(event) {
-        alert('A username and password was submitted: ' + this.state.username + " " + this.state.password);
         event.preventDefault();
-    }
+        try{
+            
+            APIrequest.post('/api/token/',{
+                username: this.state.username,
+                password: this.state.password
+            }).then((response) =>{
+               
+                APIrequest.defaults.headers['Authorization'] = "Bearer " + response.data.access;
+                localStorage.setItem('access_token', response.data.access);
+                localStorage.setItem('refresh_token', response.data.refresh);
+                return response.data;
+            }, (error) =>{
+                console.log(error);
+            });
+            
+            //console.log(response)
+                           
+            //APIrequest.defaults.headers['Authorization'] = "Bearer " + response.data.access;
+            //localStorage.setItem('access_token', response.data.access);
+            //localStorage.setItem('refresh_token', response.data.refresh);
+            //return data;
+        }catch(error){
+            throw error;
+        }
+    } 
 
     render(){
         return(

@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer
 
+
 User = get_user_model()
 
 @decorators.api_view(["POST"])
@@ -20,8 +21,9 @@ def registration(request):
         refresh = RefreshToken.for_user(user)
         res = {
             "refresh": str(refresh),
-            "access": str(refresh.access_token),
+            "access": str(refresh.access_token)
         }
+        print(res)
         return Response(res, status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)

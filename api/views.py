@@ -8,11 +8,15 @@ from .serializers import ProductSerializer, TransactionSerializer, BudgetSeriali
 from rest_framework.exceptions import  PermissionDenied
 from rest_framework import permissions
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import permission_classes
 # Create your views here.
 
 class IsOwner(permissions.BasePermission):
     def has_object_permission(self,request,view,obj):
         return obj.owner == request.user
+
+@permission_classes([IsAuthenticated])
 
 class ProductViewSet(APIView):
 
@@ -35,10 +39,13 @@ class ProductViewSet(APIView):
         return Response(product_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
     #Get all products
+    
+   # @permission_classes([IsAuthenticated])
     def get(self,request):
         all_products = Product.objects.all()
         serializer = ProductSerializer(all_products, many=True)
-        return Response(serializer.data)
+        #return Response(serializer.data)
+        return Response(data={"hello":"world"}, status=status.HTTP_200_OK)
 
 class TransactionViewSet(APIView):
     permission_classes = (IsOwner,)

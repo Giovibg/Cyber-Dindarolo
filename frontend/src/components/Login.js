@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import "./Login.css"
 import { Link } from 'react-router-dom'
 import APIrequest from "../apiServices"
+import baseURL from "../apiServices"
 
 class Login extends Component{
     constructor(props){
@@ -23,9 +24,9 @@ class Login extends Component{
 
     handleSubmit(event) {
         event.preventDefault();
-        try{
+        /*try{
             
-            APIrequest.post('/api/token/',{
+            await APIrequest.post('/api/token/',{
                 username: this.state.username,
                 password: this.state.password
             }).then((response) =>{
@@ -37,16 +38,32 @@ class Login extends Component{
             }, (error) =>{
                 console.log(error);
             });
-            
+            */
+           localStorage.setItem('access_token', null);
+           localStorage.setItem('refresh_token', null);
+           APIrequest.post('api/token/', {
+            username: this.state.username,
+            password: this.state.password
+            }).then(
+            result => {
+                APIrequest.defaults.headers['Authorization'] = "Bearer " + result.data.access;
+                localStorage.setItem('access_token', result.data.access);
+                localStorage.setItem('refresh_token', result.data.refresh);
+                console.log("AT "+ result.data.access)
+                window.location.href = "/#/hello/";
+            }
+    ).catch (error => {
+        throw error;
+    })
             //console.log(response)
                            
             //APIrequest.defaults.headers['Authorization'] = "Bearer " + response.data.access;
             //localStorage.setItem('access_token', response.data.access);
             //localStorage.setItem('refresh_token', response.data.refresh);
             //return data;
-        }catch(error){
+       /* }catch(error){
             throw error;
-        }
+        }*/
     } 
 
     render(){

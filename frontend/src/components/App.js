@@ -5,6 +5,7 @@ import './App.css'
 import Navbar from './Navbar'
 import Register from './Register'
 import Login from './Login'
+import Hello from './Hello'
 
 class App extends Component {
     
@@ -18,7 +19,7 @@ class App extends Component {
                 
                 <Route exact path= {"/login"} component={Login}/>
                 <Route exact path= {"/register"} component={Register}/>
-                
+                <Route exact path= {"/hello"} component={Hello}/>
             </Switch>
             </HashRouter>
         )

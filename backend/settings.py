@@ -53,7 +53,7 @@ REST_FRAMEWORK = {
     "rest_framework.parsers.MultiPartParser",], 
 
     "DEFAULT_AUTHENTICATION_CLASSES":                                 
-        ["rest_framework.authentication.SessionAuthentication",        
+        [#"rest_framework.authentication.SessionAuthentication",        
         "rest_framework_simplejwt.authentication.JWTAuthentication",],  
                     
 }
@@ -88,7 +88,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
-
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+)
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

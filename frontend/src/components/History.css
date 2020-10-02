@@ -1,0 +1,27 @@
+.historyRow{
+    margin-left: 20px;
+    padding: 20px;
+    display: grid;
+    align-items: center;
+    color: white;
+}
+.historyRow:hover{
+    cursor: pointer;
+    background-color: black;
+    opacity: 0.8;
+
+}
+
+.historyRow__info{
+    margin-left: 20px;
+}
+
+.historyRow__info > h2 {
+    font-size: 16px;
+}
+
+.history_line{
+    color:white;
+    border: 1px solid #585858;
+    
+}

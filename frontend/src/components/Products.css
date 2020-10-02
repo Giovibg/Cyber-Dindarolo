@@ -1,0 +1,27 @@
+.productRow{
+    margin-left: 20px;
+    padding: 20px;
+    display: inline;
+    align-items: center;
+    color: white;
+}
+.productRow:hover{
+    cursor: pointer;
+    background-color: black;
+    opacity: 0.8;
+
+}
+
+.productRow__info{
+    margin-left: 20px;
+}
+
+.productRow__info > h2 {
+    font-size: 16px;
+}
+
+.product_line{
+    color:white;
+    border: 1px solid #585858;
+    
+}

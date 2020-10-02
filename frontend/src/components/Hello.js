@@ -5,23 +5,20 @@ class Hello extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            message:"",
+            products:[],
         };
 
         this.getMessage = this.getMessage.bind(this)
     }
-    getPayload() {
-        console.log("AfT "+localStorage.getItem("access_token"));
-        console.log(jwt.decode(localStorage.getItem("refresh_token")))
-        return jwt.decode(localStorage.getItem("access_token"))
-      }
+    
 
     async getMessage(){
         try {
             let response = await APIrequest.get('/api/products/');
-            const message = response.data.hello;
+            const message = response.data;
+            console.log(message)
             this.setState({
-                message: message,
+                products: message,
             });
             return message;
         }catch(error){
@@ -40,9 +37,12 @@ class Hello extends Component {
     render(){
         return (
             <div>
-            <h1>Ciao, {this.getPayload().user_id}</h1>
+            <h1>Prodotti</h1>
             <div>
-                <p>{this.state.message}</p>
+                {this.state.products.map(product => 
+                <div key={product.id}>{product.name}  {product.id}
+                
+                </div>)}
             </div>
             </div>
         )

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import "./Login.css"
 import { Link } from 'react-router-dom'
 import APIrequest from "../apiServices"
-import baseURL from "../apiServices"
 
 class Login extends Component{
     constructor(props){
@@ -50,7 +49,7 @@ class Login extends Component{
                 localStorage.setItem('access_token', result.data.access);
                 localStorage.setItem('refresh_token', result.data.refresh);
                 console.log("AT "+ result.data.access)
-                window.location.href = "/#/hello/";
+                window.location.href = "/#/products/";
             }
     ).catch (error => {
         throw error;
@@ -70,7 +69,7 @@ class Login extends Component{
         return(
         <div className="login">
             
-            <h1>Cyber Dindarolo</h1>
+            <h1 className="title">Cyber Dindarolo</h1>
             <div className="form">
                 <form onSubmit={this.handleSubmit}>
                     <input className="username" type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange}/>
@@ -78,9 +77,9 @@ class Login extends Component{
                     <input className="submit" type="submit" value= "Submit" />
                 </form>
             </div>
-            <div>
+            <div className="sign">
             
-            <Link to ="/register"><button className="Register">Sign UP</button></Link>
+            <Link to ="/register"><button className="signup">Sign UP</button></Link>
             
             </div>
         </div>

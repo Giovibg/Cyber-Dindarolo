@@ -1,0 +1,19 @@
+.sidebarOption{
+    display: flex;
+    color:gray;
+    height:60px;
+    margin-top:20px;
+    cursor: pointer;
+    transition: 200ms color ease-in;
+}
+
+.sidebarOption:hover{
+    color:#b91d37;
+}
+
+.sidebarOption_icon{
+    margin-left: 40px;
+    margin-right:20px;
+    
+}
+

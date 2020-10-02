@@ -52,9 +52,9 @@ class Register extends Component{
     render(){
         return(
             
-            <div className="register">
+            <div className="reg">
                 
-                <h1>Create Account</h1>
+                <h1 className="title">Create Account</h1>
                 <div className="form_reg">
                     <form onSubmit={this.handleSubmit}>
                         <input className="username" type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange}/>
@@ -68,6 +68,7 @@ class Register extends Component{
                         <input className="submit" type="submit" value= "SIGN UP" />
                     </form>
                 </div>
+                
                
             </div>
             

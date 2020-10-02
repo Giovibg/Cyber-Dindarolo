@@ -44,8 +44,8 @@ class ProductViewSet(APIView):
     def get(self,request):
         all_products = Product.objects.all()
         serializer = ProductSerializer(all_products, many=True)
-        #return Response(serializer.data)
-        return Response(data={"hello":"world"}, status=status.HTTP_200_OK)
+        return Response(serializer.data)
+        #return Response(data={"hello":"world"}, status=status.HTTP_200_OK)
 
 class TransactionViewSet(APIView):
     permission_classes = (IsOwner,)

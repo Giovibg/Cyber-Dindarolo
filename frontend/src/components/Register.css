@@ -1,10 +1,21 @@
+.reg{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+
+}
 .register > text{
     color: white;
 }
 
-.form{
+.form_reg{
     display:flex; 
     flex-direction: column;
+}
+.title{
+    text-transform: uppercase;
+    padding-bottom: 50px;
+    display: flex;
 }
 .submit {
     clear: both;
@@ -19,6 +30,22 @@
     color: RGBA(231, 252, 255, 1);
     font-weight: 400;
     font-size: 12px;
+    text-transform: uppercase;
+}
+
+.blank{
+    clear: both;
+    display: block;
+    margin: 50px auto;
+    width: 240px;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-radius: 30px;
+    color: RGBA(231, 252, 255, 1);
+    font-weight: 400;
+    font-size: 20px;
     text-transform: uppercase;
 }
 

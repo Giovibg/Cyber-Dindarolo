@@ -1,10 +1,21 @@
 
+.login{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+
+}
 .login > text{
     color: white;
 }
 .form{
     display:flex; 
     flex-direction: column;
+}
+.title{
+    text-transform: uppercase;
+    padding-bottom: 50px;
+    display: flex;
 }
 .submit {
     clear: both;
@@ -22,7 +33,7 @@
     text-transform: uppercase;
 }
 
-.register{
+.signup{
     clear: both;
     display: block;
     margin: 50px auto;

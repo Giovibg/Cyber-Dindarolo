@@ -65,7 +65,7 @@ class TransactionViewSet(APIView):
         serializer = TransactionSerializer(data = request.data)
         user = self.request.user
         if serializer.is_valid():
-            
+            total = 0
             if serializer.validated_data['trans_type'] == 'DOWN':
                 total = -serializer.validated_data['quantity'] * serializer.validated_data['unit_price']
                 print(total)
@@ -90,6 +90,7 @@ class TransactionViewSet(APIView):
             if (old_budget + total) >= 0:
                 old_budget += total
                 budget.budget = old_budget
+                print("new budget: "+ str(old_budget))
                 budget.save()
                 
                 serializer.save(subtotal = total, owner = self.request.user)

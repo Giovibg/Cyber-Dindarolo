@@ -9,7 +9,8 @@ class Login extends Component{
 
         this.state = {
             username:"", 
-            password:""
+            password:"",
+            errors:{}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -21,48 +22,28 @@ class Login extends Component{
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
-        /*try{
-            
-            await APIrequest.post('/api/token/',{
+        try{
+            localStorage.setItem('access_token', null);
+            localStorage.setItem('refresh_token', null);
+            localStorage.setItem('username', null);
+            const response = await APIrequest.post('/api/token/',{
                 username: this.state.username,
                 password: this.state.password
-            }).then((response) =>{
+            });
                
                 APIrequest.defaults.headers['Authorization'] = "Bearer " + response.data.access;
                 localStorage.setItem('access_token', response.data.access);
                 localStorage.setItem('refresh_token', response.data.refresh);
-                return response.data;
-            }, (error) =>{
-                console.log(error);
-            });
-            */
-           localStorage.setItem('access_token', null);
-           localStorage.setItem('refresh_token', null);
-           APIrequest.post('api/token/', {
-            username: this.state.username,
-            password: this.state.password
-            }).then(
-            result => {
-                APIrequest.defaults.headers['Authorization'] = "Bearer " + result.data.access;
-                localStorage.setItem('access_token', result.data.access);
-                localStorage.setItem('refresh_token', result.data.refresh);
-                console.log("AT "+ result.data.access)
-                window.location.href = "/#/products/";
+                localStorage.setItem('username',this.state.username);
+                window.location.href = "/#/home/";
+                return response;
+            }catch (error){
+                console.log(error.response.data);
+                this.setState({errors:error.response.data});
             }
-    ).catch (error => {
-        throw error;
-    })
-            //console.log(response)
-                           
-            //APIrequest.defaults.headers['Authorization'] = "Bearer " + response.data.access;
-            //localStorage.setItem('access_token', response.data.access);
-            //localStorage.setItem('refresh_token', response.data.refresh);
-            //return data;
-       /* }catch(error){
-            throw error;
-        }*/
+            
     } 
 
     render(){
@@ -73,8 +54,12 @@ class Login extends Component{
             <div className="form">
                 <form onSubmit={this.handleSubmit}>
                     <input className="username" type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange}/>
+                    <div className="errors">{ this.state.errors.username ? this.state.errors.username : null}</div>
                     <input className="password" type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+                    <div className="errors">{ this.state.errors.password ? this.state.errors.password : null}</div>
+                    <div className="errors">{ this.state.errors.detail ? this.state.errors.detail : null}</div>
                     <input className="submit" type="submit" value= "Submit" />
+                   
                 </form>
             </div>
             <div className="sign">

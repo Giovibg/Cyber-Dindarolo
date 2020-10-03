@@ -2,4 +2,9 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 30px;
+
+}
+.header_budget{
+    color: #1DB954;
+    margin-top:20px;
 }

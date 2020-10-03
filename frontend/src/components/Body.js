@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import "./Body.css"
 import Header from "./Header"
 import Products from "./Products"
+import History from "./History"
+import { HashRouter, Route , Switch} from 'react-router-dom'
 class Body extends Component{
     
     render(){
@@ -9,7 +11,8 @@ class Body extends Component{
             <div className="body">
                 
                 <Header />
-                <Products />
+                <History />
+                {/*<Products />*/}
             </div>
         )
     }

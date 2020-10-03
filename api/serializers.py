@@ -6,9 +6,10 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'description')
 
 class TransactionSerializer(serializers.ModelSerializer):
+    product_name = serializers.ReadOnlyField(source='product.name')
     class Meta:
         model = Transaction
-        fields = ('id', 'product', 'unit_price', 'trans_type', 'quantity', 'currency', 'transaction_timestamp','subtotal','owner') 
+        fields = ('id', 'product_name', 'unit_price', 'trans_type', 'quantity', 'currency', 'transaction_timestamp','subtotal','owner') 
 
 
 

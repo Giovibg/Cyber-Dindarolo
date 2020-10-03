@@ -28,9 +28,7 @@ class History extends Component {
     }
 
     componentDidMount(){
-        // It's not the most straightforward thing to run an async method in componentDidMount
 
-        // Version 1 - no async: Console.log will output something undefined.
         this.getMessage();
     }
 
@@ -41,14 +39,14 @@ class History extends Component {
             <div className="historyRow">
                 <div className="historyRow__info">
                 {this.state.transactions.map(transaction => 
-                <div key={transaction.id}><h2>{transaction.id}</h2>  
-                    <h2>{transaction.product}</h2>
-                    <h2>{transaction.unit_price}</h2>
-                    <h2>{transaction.quantity}</h2>
-                    <h2>{transaction.subtotal}</h2>
-                    <h2>{transaction.transaction_timestamp}</h2>
+                <div> <tr className="table" key={transaction.id}>
+                     {Object.values(transaction).map((val) => (
+                    <td className="element"><h4>{val}</h4></td>
+                    ))}
+                    
+                    </tr> 
 
-                <hr className="history_line" />
+                
                 </div>)}
                 
                 </div>

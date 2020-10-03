@@ -24,9 +24,9 @@ class App extends Component {
                 <Route exact path= {"/"} component={Login}/>
                 <Route exact path= {"/register"} component={Register}/>
                 <Route exact path= {"/hello"} component={Hello}/>
-                <Route exact path= {"/products"} component={Products}/>
-                <Route exact path= {"/home"} component={Dashboard}/>
                 <Route exact path= {"/history"} component={History}/>
+                <Route exact path= {"/home"} component={Dashboard}/>
+                
             </Switch>
             </HashRouter>
         )

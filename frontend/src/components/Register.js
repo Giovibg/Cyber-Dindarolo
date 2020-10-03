@@ -25,6 +25,9 @@ class Register extends Component{
         event.preventDefault();
         console.log(this.state.username, this.state.password, this.state.confirm_password, this.state.email)
         try {
+                localStorage.setItem('access_token', null);
+                localStorage.setItem('refresh_token', null);
+                localStorage.setItem('username', null);
                 const response =  await axios.post('/jwt_auth/register/', {
                 username: this.state.username,
                 email: this.state.email,
@@ -32,11 +35,10 @@ class Register extends Component{
                 password2:this.state.confirm_password
                 
             });
-            console.log("res:")
-            console.log(response)
             APIrequest.defaults.headers['Authorization'] = "Bearer " + response.data.access;
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
+            localStorage.setItem('username',this.state.username)
             console.log("AT "+ response.data.access)
             window.location.href = "/#/hello/";
             return response;

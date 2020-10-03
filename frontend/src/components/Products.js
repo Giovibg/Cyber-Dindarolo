@@ -23,14 +23,11 @@ class Products extends Component {
             return message;
         }catch(error){
             console.log("Product error: ", JSON.stringify(error, null, 4));
-            // throw error; todo
         }
     }
 
     componentDidMount(){
-        // It's not the most straightforward thing to run an async method in componentDidMount
-
-        // Version 1 - no async: Console.log will output something undefined.
+        
         this.getMessage();
     }
 

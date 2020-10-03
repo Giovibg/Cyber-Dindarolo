@@ -77,5 +77,10 @@
     border: none;
     margin-top: 15px;
 }
-
+.errors{
+    color:red;
+    font-size: 13px;
+    text-transform: lowercase;
+    margin-top:10px;
+}
 

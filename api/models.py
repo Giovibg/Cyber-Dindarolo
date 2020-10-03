@@ -26,5 +26,5 @@ class Transaction(models.Model):
 
 class Budget(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    budget = models.IntegerField(default=0)
+    budget = models.FloatField(default=0.00)
 

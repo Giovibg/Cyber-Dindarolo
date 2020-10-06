@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import "./Login.css"
 import { Link } from 'react-router-dom'
 import APIrequest from "../apiServices"
-
+import Body from "./Body"
 class Login extends Component{
     constructor(props){
         super(props);
@@ -38,6 +38,7 @@ class Login extends Component{
                 localStorage.setItem('refresh_token', response.data.refresh);
                 localStorage.setItem('username',this.state.username);
                 window.location.href = "/#/home/";
+               
                 return response;
             }catch (error){
                 console.log(error.response.data);

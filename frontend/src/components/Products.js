@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import APIrequest from "../apiServices";
 import "./Products.css"
+import Header from "./Header"
 class Products extends Component {
     constructor(props) {
         super(props);
@@ -33,12 +34,15 @@ class Products extends Component {
 
     render(){
         return (
+            
+            
+            
             <div>
             <h1>Products</h1>
             <div className="productRow">
                 <div className="productRow__info">
                 {this.state.products.map(product => 
-                <div key={product.id}><h2>{product.name}</h2>  <p>{product.description}</p>
+                <div key={product.id}><div className="el"><h2>{product.name}</h2>  <p>{product.description}</p></div>
                 <hr className="product_line" />
                 </div>)}
                 

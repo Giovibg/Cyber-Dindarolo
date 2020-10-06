@@ -36,7 +36,8 @@
     margin:30px;
 }
 .table:hover{
-    cursor: pointer;
+    /*cursor: pointer;*/
     background-color: black;
     opacity: 0.8;
+    margin: 10px;
 }

@@ -3,7 +3,7 @@ import "./Body.css"
 import Header from "./Header"
 import Products from "./Products"
 import History from "./History"
-import { HashRouter, Route , Switch} from 'react-router-dom'
+import { HashRouter, Route, Switch} from 'react-router-dom'
 class Body extends Component{
     
     render(){
@@ -11,7 +11,10 @@ class Body extends Component{
             <div className="body">
                 
                 <Header />
-                <History />
+                
+                <Route exact path={this.props.path} component={Products} />
+                <Route path={`${this.props.path}/history`} component={History} />
+                <Route path={`${this.props.path}/products`} component={Products} />
                 {/*<Products />*/}
             </div>
         )

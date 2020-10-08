@@ -8,6 +8,7 @@ class CreateTransaction extends Component{
         super(props);
         this.state = {
             product_name: '',
+            product_id: null,
             unit_price: 0.0,
             trans_type:"",
             quantity:0,
@@ -30,7 +31,8 @@ class CreateTransaction extends Component{
 
     stateChange_p = product_name =>{
         console.log(product_name)
-        this.setState({product_name:product_name.value})
+        this.setState({product_id:product_name.value})
+        this.setState({product_name:product_name.label})
     }
 
     stateChange_t = trans_type =>{
@@ -43,7 +45,7 @@ class CreateTransaction extends Component{
         console.log("export: ",this.state.product_name, this.state.trans_type, this.state.quantity, this.state.unit_price)
         try {
                 const response =  await APIrequest.put('/api/transactions/', {
-                product_name: this.state.product_name,
+                product: this.state.product_id,
                 unit_price: this.state.unit_price,
                 trans_type: this.state.trans_type,
                 quantity:this.state.quantity,
@@ -110,11 +112,12 @@ class CreateTransaction extends Component{
                         <Select className="selection"
                             value={this.state.product_name}
                             onChange={this.stateChange_p}
-                            options={this.state.list_product.map(t=> ({value: t.name, label: t.name}))}
+                            options={this.state.list_product.map(t=> ({value: t.id, label: t.name}))}
                             placeholder={this.state.product_name}
                             styles={customStyles}
                         />
                         </div>
+                        <div className="errors">{ this.state.errors.product ? this.state.errors.product : null}</div>
                         Unit price
                         <input className="unit_price" type="number" step="0.01" min="0" name="unit_price" placeholder="Unit Price" value={this.state.unit_price} onChange={this.handleChange}/>
                         
@@ -137,6 +140,7 @@ class CreateTransaction extends Component{
                         <div className="errors">{this.state.errors.trans_type ? this.state.errors.trans_type : null}</div>
                         
                         <input className="submit" type="submit" value= "Create Transaction" />
+                        <div className="errors">{ this.state.errors.message ? this.state.errors.message : null}</div>
                     </form>
                 </div>   
             </div>

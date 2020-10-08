@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import APIrequest from "../apiServices";
 import "./Products.css"
-import Header from "./Header"
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
 class Products extends Component {
     constructor(props) {
         super(props);
@@ -30,6 +31,7 @@ class Products extends Component {
     componentDidMount(){
         
         this.getMessage();
+
     }
 
     render(){
@@ -38,7 +40,14 @@ class Products extends Component {
             
             
             <div>
-            <h1>Products</h1>
+
+            <div className="add_prod">
+            <h1>Available Products</h1>
+            
+            <Fab color="secondary" aria-label="add">
+            <a href="/#/home/transactions" className="add_btn"><AddIcon /></a>
+            </Fab>
+            </div>
             <div className="productRow">
                 <div className="productRow__info">
                 {this.state.products.map(product => 
@@ -48,6 +57,7 @@ class Products extends Component {
                 
                 </div>
             </div>
+            
             </div>
         )
     }

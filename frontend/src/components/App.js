@@ -11,6 +11,7 @@ import Generics from '../Generics'
 import Dashboard from './Dashboard'
 import History from './History'
 import Body from './Body'
+import CreateTransaction from './CreateTransaction'
 class App extends Component {
     
     render(){

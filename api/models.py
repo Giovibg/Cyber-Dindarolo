@@ -13,7 +13,7 @@ class Product(models.Model):
 
 class Transaction(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)
+    product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING, blank=False)
     unit_price = models.FloatField()
     quantity = models.IntegerField()
     subtotal = models.FloatField(blank=True, default=0)

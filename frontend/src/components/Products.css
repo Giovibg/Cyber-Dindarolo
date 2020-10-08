@@ -12,6 +12,10 @@
     opacity: 0.8;
 
 }
+.add_prod{
+    display: flex;
+    justify-content: space-between;
+}
 
 .productRow__info{
     margin-left: 20px;
@@ -25,4 +29,8 @@
     color:white;
     border: 1px solid #585858;
     
+}
+
+.add_btn{
+    color:white;
 }

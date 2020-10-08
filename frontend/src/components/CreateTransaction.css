@@ -1,0 +1,87 @@
+.tr{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.form_trans{
+    margin: 20px;
+}
+.selection{
+     
+    flex-direction: column;
+    width: 360px;
+    height: 35px;
+    background-color: rgba(46, 47, 51, 0.75);
+    border-radius: 3px;
+    padding-left: 10px;
+    color: rgb(136, 137, 140);
+    font-size: 12px;
+    outline: none;
+    border: none;
+    margin-bottom: 40px;
+}
+.element{
+    display:flex; 
+    flex-direction: column;
+    width: 360px;
+    height: 35px;
+    background-color: rgba(46, 47, 51, 0.75);
+    border-radius: 3px;
+    padding-left: 10px;
+    color: rgb(136, 137, 140);
+    font-size: 12px;
+    outline: none;
+    border: none;
+    margin-top: 15px;
+}
+
+.unit_price{
+    display:flex; 
+    flex-direction: column;
+    width: 360px;
+    height: 35px;
+    background-color: rgba(46, 47, 51, 0.75);
+    border-radius: 3px;
+    padding-left: 10px;
+    color: rgb(136, 137, 140);
+    font-size: 12px;
+    outline: none;
+    border: none;
+}
+.quantity{
+    display:flex; 
+    flex-direction: column;
+    width: 360px;
+    height: 35px;
+    background-color: rgba(46, 47, 51, 0.75);
+    border-radius: 3px;
+    padding-left: 10px;
+    color: rgb(136, 137, 140);
+    font-size: 12px;
+    outline: none;
+    border: none;
+}
+
+.errors{
+    color:red;
+    font-size: 13px;
+    text-transform: lowercase;
+    margin-top:10px;
+}
+
+.submit {
+    clear: both;
+    display: block;
+    margin: 50px auto;
+    width: 200px;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: #b91d37;
+    border-radius: 30px;
+    color: RGBA(231, 252, 255, 1);
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: uppercase;
+}

@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import Product, Transaction, Budget
 from rest_framework.views import APIView
-from .serializers import ProductSerializer, TransactionSerializer, BudgetSerializer, BudgetGetSerializer
+from .serializers import ProductSerializer, TransactionSerializer, BudgetSerializer, BudgetGetSerializer, TransactionGetSerializer
 from rest_framework.exceptions import  PermissionDenied
 from rest_framework import permissions
 from rest_framework.authentication import TokenAuthentication
@@ -55,7 +55,7 @@ class TransactionViewSet(APIView):
         user = self.request.user
         if user.is_authenticated:
             all_transactions = Transaction.objects.filter(owner=user)
-            serializer_class = TransactionSerializer(all_transactions, many=True)
+            serializer_class = TransactionGetSerializer(all_transactions, many=True)
             return Response(serializer_class.data)
         raise PermissionDenied()
         
@@ -89,10 +89,12 @@ class TransactionViewSet(APIView):
             #Update only if positive budget
             if (old_budget + total) >= 0:
                 old_budget += total
-                budget.budget = old_budget
-                print("new budget: "+ str(old_budget))
+                new_budget = round(float(old_budget), 2)
+                budget.budget = new_budget
+                print("new budget: "+ str(new_budget))
+
                 budget.save()
-                
+                total = round(float(total), 2)
                 serializer.save(subtotal = total, owner = self.request.user)
                          
                 #serializer.save(subtotal = total)

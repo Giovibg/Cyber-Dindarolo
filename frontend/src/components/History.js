@@ -34,7 +34,7 @@ class History extends Component {
 
     render(){
         return (
-            <div>
+            <div className="history">
             <h1>History</h1>
             <div className="historyRow">
                 <div className="historyRow__info">

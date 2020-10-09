@@ -57,7 +57,9 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",],  
                     
 }
-
+DATETIME_FORMAT = '%d-%m-%Y' 
+USE_L10N = False
+USE_TZ = False
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

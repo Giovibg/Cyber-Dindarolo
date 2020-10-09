@@ -9,12 +9,13 @@ class CreateTransaction extends Component{
         this.state = {
             product_name: '',
             product_id: null,
-            unit_price: 0.0,
+            unit_price: 0.01,
             trans_type:"",
-            quantity:0,
+            quantity:1,
             currency:"EUR",
             errors:{},
-            list_product: []
+            list_product: [],
+            message: {}
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -42,7 +43,6 @@ class CreateTransaction extends Component{
 
     async handleSubmit(event) {
         event.preventDefault();
-        console.log("export: ",this.state.product_name, this.state.trans_type, this.state.quantity, this.state.unit_price)
         try {
                 const response =  await APIrequest.put('/api/transactions/', {
                 product: this.state.product_id,
@@ -51,6 +51,9 @@ class CreateTransaction extends Component{
                 quantity:this.state.quantity,
                 currency:this.state.currency
             });
+            console.log("res:",response.data.message)
+            this.setState({message : response.data});
+            
             return response;
         } catch (error) {
             console.log(error.response.data);
@@ -104,7 +107,9 @@ class CreateTransaction extends Component{
         return(
             
             <div className="tr">
-                <h1 className="title">Create Transaction</h1>
+                
+                <h1>Create Transaction</h1>
+                
                 <div className="form_trans">
                     <form onSubmit={this.handleSubmit}>
                         <div className="custom_select">
@@ -141,6 +146,7 @@ class CreateTransaction extends Component{
                         
                         <input className="submit" type="submit" value= "Create Transaction" />
                         <div className="errors">{ this.state.errors.message ? this.state.errors.message : null}</div>
+                        <div className="created">{ this.state.message.message ? this.state.message.message : null}</div>
                     </form>
                 </div>   
             </div>

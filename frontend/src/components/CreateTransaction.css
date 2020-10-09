@@ -1,11 +1,11 @@
+
 .tr{
     display: grid;
     place-items: center;
-    height: 100vh;
 }
 
 .form_trans{
-    margin: 20px;
+    margin: 100px;
 }
 .selection{
      
@@ -70,6 +70,12 @@
     margin-top:10px;
 }
 
+.created{
+    color: #1DB954;
+    font-size: 13px;
+    text-transform: lowercase;
+    margin-top:10px;
+}
 .submit {
     clear: both;
     display: block;

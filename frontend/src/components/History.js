@@ -36,12 +36,18 @@ class History extends Component {
         return (
             <div className="history">
             <h1>History</h1>
+            
             <div className="historyRow">
+                
                 <div className="historyRow__info">
+                <div className="history__info">
+            <h4>#id</h4> <h4>Product</h4> <h4>Unit price</h4> <h4>type</h4> <h4>quantity</h4> <h4>currency</h4> <h4>date</h4> <h4>subtotal</h4>
+            </div>
+            <hr className="history_line" />
                 {this.state.transactions.map(transaction => 
-                <div> <tr className="table" key={transaction.id}>
-                     {Object.values(transaction).map((val) => (
-                    <td className="element"><h4>{val}</h4></td>
+                <div> <tr className="history__table" key={transaction.id}>
+                     {Object.values(transaction).map((val) => ( 
+                    <td className="history__element"><h4>{val}</h4></td>
                     ))}
                     
                     </tr> 

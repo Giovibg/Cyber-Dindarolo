@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 #from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.utils import timezone
 # Create your models here.
 
 class Product(models.Model):
@@ -12,8 +12,8 @@ class Product(models.Model):
         return f'{self.name}'
 
 class Transaction(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING, blank=False)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)
     unit_price = models.FloatField()
     quantity = models.IntegerField()
     subtotal = models.FloatField(blank=True, default=0)
@@ -25,6 +25,6 @@ class Transaction(models.Model):
         ordering = ['-transaction_timestamp']
 
 class Budget(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     budget = models.FloatField(default=0.00)
 

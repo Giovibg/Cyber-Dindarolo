@@ -40,7 +40,7 @@ class Register extends Component{
             localStorage.setItem('refresh_token', response.data.refresh);
             localStorage.setItem('username',this.state.username)
             console.log("AT "+ response.data.access)
-            window.location.href = "/#/hello/";
+            window.location.href = "/#/home/";
             return response;
         } catch (error) {
             console.log(error.response.data);

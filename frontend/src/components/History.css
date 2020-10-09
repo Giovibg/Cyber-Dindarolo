@@ -2,7 +2,8 @@
 .historyRow{
     margin-left: 20px;
     padding: 20px;
-    display: flex;
+    display: inline;
+    align-items: center;
     color: white;
 }
 
@@ -19,24 +20,31 @@
     border: 1px solid #585858;
     
 }
-
-.table
+.history__info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin:30px;
+    color: #585858;
+    text-transform: uppercase;
+}
+.history__table
 {
     display: flex;
-    color:white;
-    border-style: hidden;
-    border-bottom-style: hidden;
-    border-top-style: hidden;
+    align-items: center;
+    justify-content: space-between;
+    
 }
 
-.element{
+.history__element{
     border: 0;
     table-layout: fixed;
     width:100px;
     border-style: hidden;
     margin:30px;
+    
 }
-.table:hover{
+.history__table:hover{
     /*cursor: pointer;*/
     background-color: black;
     opacity: 0.8;

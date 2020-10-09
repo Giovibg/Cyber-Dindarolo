@@ -5,13 +5,7 @@ import './App.css'
 //import Navbar from './Navbar'
 import Register from './Register'
 import Login from './Login'
-import Hello from './Hello'
-import Products from './Products'
-import Generics from '../Generics'
 import Dashboard from './Dashboard'
-import History from './History'
-import Body from './Body'
-import CreateTransaction from './CreateTransaction'
 class App extends Component {
     
     render(){

@@ -39,9 +39,10 @@
 .history__element{
     border: 0;
     table-layout: fixed;
-    width:100px;
+    width:100%;
     border-style: hidden;
     margin:30px;
+    font-size: medium;
     
 }
 .history__table:hover{
@@ -49,4 +50,8 @@
     background-color: black;
     opacity: 0.8;
     margin: 10px;
+}
+.table{
+    color:white;
+    
 }

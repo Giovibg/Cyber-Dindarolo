@@ -3,6 +3,7 @@ import "./CreateTransaction.css"
 import axios from 'axios'
 import APIrequest from '../apiServices'
 import Select from 'react-select'
+import Header from './Header'
 class CreateTransaction extends Component{
     constructor(props){
         super(props);
@@ -41,6 +42,8 @@ class CreateTransaction extends Component{
         this.setState({trans_type:trans_type.value})
     }
 
+    
+
     async handleSubmit(event) {
         event.preventDefault();
         try {
@@ -53,6 +56,8 @@ class CreateTransaction extends Component{
             });
             console.log("res:",response.data.message)
             this.setState({message : response.data});
+            window.location.reload(); 
+            
             
             return response;
         } catch (error) {
@@ -107,9 +112,9 @@ class CreateTransaction extends Component{
         return(
             
             <div className="tr">
-                
+                <div className="title_create">
                 <h1>Create Transaction</h1>
-                
+                </div>
                 <div className="form_trans">
                     <form onSubmit={this.handleSubmit}>
                         <div className="custom_select">

@@ -37,26 +37,37 @@ class History extends Component {
             <div className="history">
             <h1>History</h1>
             
-            <div className="historyRow">
-                
-                <div className="historyRow__info">
-                <div className="history__info">
-            <h4>#id</h4> <h4>Product</h4> <h4>Unit price</h4> <h4>type</h4> <h4>quantity</h4> <h4>currency</h4> <h4>date</h4> <h4>subtotal</h4>
-            </div>
-            <hr className="history_line" />
-                {this.state.transactions.map(transaction => 
-                <div> <tr className="history__table" key={transaction.id}>
-                     {Object.values(transaction).map((val) => ( 
-                    <td className="history__element"><h4>{val}</h4></td>
-                    ))}
-                    
-                    </tr> 
-
-                
-                </div>)}
-                
-                </div>
-            </div>
+            
+            <div className="history__info">
+                <h4>Product</h4>
+                <h4>Unit Price</h4>
+                <h4>type</h4>
+                <h4>quantity</h4>
+                <h4>currency</h4>
+                <h4>date</h4>
+                <h4>subtotal</h4>
+              </div>
+              
+              
+              <hr className="history_line" />
+            <table className="table">
+            <tbody>
+              
+              {this.state.transactions.map(transaction =>
+              <tr key={transaction.id} className="history__table">
+                <td className="history__element">{transaction.product_name}</td>
+                <td className="history__element">{transaction.unit_price}</td>
+                <td className="history__element">{transaction.trans_type}</td>
+                <td className="history__element">{transaction.quantity}</td>
+                <td className="history__element">{transaction.currency}</td>
+                <td className="history__element">{(transaction.transaction_timestamp).substring(0, 10)}</td>
+                <td className="history__element">{transaction.subtotal}</td>
+                <tr class="bordered"></tr>
+              </tr>)}
+              
+            </tbody>
+            
+          </table>
             </div>
         )
     }

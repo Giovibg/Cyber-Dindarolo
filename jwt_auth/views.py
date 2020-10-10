@@ -27,3 +27,4 @@ def registration(request):
         return Response(res, status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+

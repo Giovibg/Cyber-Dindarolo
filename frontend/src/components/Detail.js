@@ -12,8 +12,9 @@ class Detail extends Component {
 }
 
 componentDidMount(){
-  this.customDialog.show();
+  this.dialogWithCallBacks.show();
 }
+
       render(){
         var modalStyle = {
           backgroundColor: '#282828',
@@ -28,24 +29,21 @@ componentDidMount(){
           
         };
         return(
-            <SkyLight dialogStyles={modalStyle} hideOnOverlayClicked ref={ref => this.customDialog = ref} title="Detail">
+            <SkyLight dialogStyles={modalStyle} afterClose={this.props.action} hideOnOverlayClicked ref={ref => this.dialogWithCallBacks = ref} title="Detail">
                 <div className="Details">
-                <div className="history__info">
-                <h4>Product</h4>
-                <h4>Unit Price</h4>
-                <h4>quantity</h4>
-                <h4>type</h4>
-                <h4>currency</h4>
-                <h4>date</h4>
-                <h4>subtotal</h4>
-              </div>
+                <table className="table">
+            <tbody>
+                <tr className="detail__info">
+                <td>Product</td>
+                <td>Unit Price</td>
+                <td>quantity</td>
+                <td>type</td>
+                <td>currency</td>
+                <td>date</td>
+                <td>subtotal</td>
+              </tr>
               
-              
-              <hr className="history_line" />
-            
-              
-              
-              <tr className="detail__table">
+              <tr className="">
                 <td className="detail__element">{this.props.transact.product_name}</td>
                 <td className="detail__element">{this.props.transact.unit_price}</td>
                 <td className="detail__element">{this.props.transact.quantity}</td>
@@ -55,9 +53,12 @@ componentDidMount(){
                 <td className="detail__element">{this.props.transact.subtotal}</td>
                 
               </tr>
-              
+              </tbody>
+              </table>
+              <button onClick = {this.props.action}>click</button> 
                 </div>
              </SkyLight>
+             
         );
         }
 }

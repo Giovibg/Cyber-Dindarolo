@@ -1,10 +1,7 @@
 
 .detail__element{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin:30px;
-    color: red;
+    
+    padding:90px;
     text-transform: uppercase;
     font-size: large;
 }
@@ -14,7 +11,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    align-items: center;
+    margin:100px;
     border:none;
-    color:red;
+}
+
+.detail__info{
+    color: #888888;
+    margin-bottom:100px;
+    text-transform: uppercase;
+    font-size: large;
 }

@@ -14,6 +14,7 @@ class History extends Component {
 
         this.getMessage = this.getMessage.bind(this)
         this.handleClick = this.handleClick.bind(this);
+        this.changeStatus = this.changeStatus.bind(this);
         
     }
     
@@ -48,6 +49,12 @@ class History extends Component {
     });
     
   }
+
+  changeStatus(){
+    this.setState({
+      detail: false
+    })
+  }
     
     render(){
 
@@ -80,7 +87,8 @@ class History extends Component {
             </tbody>
             
           </table>
-          {this.state.detail?<Detail transact={this.state.single_transaction}/>:null}
+          {this.state.detail ? <Detail action={this.changeStatus} transact={this.state.single_transaction}/> : null}
+          
             </div>
         )
     }

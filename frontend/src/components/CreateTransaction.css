@@ -1,7 +1,6 @@
 
 .tr{
-    display: grid;
-    place-items: center;
+    align-items: center;
 }
 
 .form_trans{

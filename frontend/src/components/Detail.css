@@ -1,0 +1,20 @@
+
+.detail__element{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin:30px;
+    color: red;
+    text-transform: uppercase;
+    font-size: large;
+}
+
+.detail__table
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    border:none;
+    color:red;
+}

@@ -1,14 +1,20 @@
 import React, { Component } from "react";
 import APIrequest from "../apiServices";
 import "./History.css"
+import Detail from "./Detail"
+import SkyLight from 'react-skylight';
 class History extends Component {
     constructor(props) {
         super(props);
         this.state = {
             transactions:[],
+            single_transaction: 0,
+            detail : false
         };
 
         this.getMessage = this.getMessage.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        
     }
     
 
@@ -26,13 +32,27 @@ class History extends Component {
             // throw error; todo
         }
     }
+    
 
     componentDidMount(){
 
         this.getMessage();
     }
+    
 
+  handleClick(val) {
+    console.log(val.product_name); 
+    this.setState({
+        detail: !this.state.detail,
+        single_transaction: val
+    });
+    
+  }
+    
     render(){
+
+    
+        
         return (
             <div className="history">
             <h1>History</h1>
@@ -40,10 +60,6 @@ class History extends Component {
             
             <div className="history__info">
                 <h4>Product</h4>
-                <h4>Unit Price</h4>
-                <h4>type</h4>
-                <h4>quantity</h4>
-                <h4>currency</h4>
                 <h4>date</h4>
                 <h4>subtotal</h4>
               </div>
@@ -54,20 +70,17 @@ class History extends Component {
             <tbody>
               
               {this.state.transactions.map(transaction =>
-              <tr key={transaction.id} className="history__table">
+              <tr key={transaction.id} className="history__table" onClick={() => this.handleClick(transaction)}>
                 <td className="history__element">{transaction.product_name}</td>
-                <td className="history__element">{transaction.unit_price}</td>
-                <td className="history__element">{transaction.trans_type}</td>
-                <td className="history__element">{transaction.quantity}</td>
-                <td className="history__element">{transaction.currency}</td>
                 <td className="history__element">{(transaction.transaction_timestamp).substring(0, 10)}</td>
                 <td className="history__element">{transaction.subtotal}</td>
-                <tr class="bordered"></tr>
+            
               </tr>)}
               
             </tbody>
             
           </table>
+          {this.state.detail?<Detail transact={this.state.single_transaction}/>:null}
             </div>
         )
     }

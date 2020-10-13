@@ -60,13 +60,10 @@ class Login extends Component{
                     <div className="errors">{ this.state.errors.password ? this.state.errors.password : null}</div>
                     <div className="errors">{ this.state.errors.detail ? this.state.errors.detail : null}</div>
                     <input className="submit" type="submit" value= "Submit" />
-                   
                 </form>
             </div>
             <div className="sign">
-            
-            <Link to ="/register"><button className="signup">Sign UP</button></Link>
-            
+                <Link to ="/register"><button className="signup">Sign UP</button></Link>
             </div>
         </div>
         )

@@ -78,41 +78,40 @@ class Products extends Component {
           };
         
         return (
-            
-            
-            
-            <div>
 
-            <div className="add_prod">
-            <h1>Available Products</h1>
-            
-            <Fab color="secondary" aria-label="add"onClick={() => this.customDialog.show()} className="add_btn"><AddIcon />
-            </Fab>
-            </div>
-            <SkyLight dialogStyles={modalStyle} hideOnOverlayClicked ref={ref => this.customDialog = ref} title="Add Product">
-                <div>
-            <form onSubmit={this.handleSubmit}>
-                    <input className="name_prod" type="text" name="name_prod" placeholder="name" value={this.state.name_prod} onChange={this.handleChange} />
-                    <div className="errors">{ this.state.errors.name ? this.state.errors.name : null}</div>
-                    <input className="description_prod" type="text" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange} />
-                    <div className="errors">{ this.state.errors.description ? this.state.errors.description : null}</div>
-                    <div className="errors">{ this.state.errors.message ? this.state.errors.message : null}</div>
-                    <input className="submit" type="submit" value= "Add Product" />
-                   
-                </form>
+            <div>
+                <div className="add_prod">
+                    <h1>Available Products</h1>
+
+                    <Fab color="secondary" 
+                     aria-label="add"onClick={() => this.customDialog.show()} 
+                     className="add_btn"><AddIcon /></Fab>
                 </div>
-             </SkyLight>
-            
-            <div className="productRow">
-                <div className="productRow__info">
-                {this.state.products.map(product => 
-                <div key={product.id}><div className="el"><h2>{product.name}</h2>  <p>{product.description}</p></div>
-                <hr className="product_line" />
-                </div>)}
-                
-                </div>
-            </div>
-            
+                <SkyLight dialogStyles={modalStyle} 
+                        hideOnOverlayClicked ref={ref => this.customDialog = ref} 
+                        title="Add Product">
+                    <div>
+                        <form onSubmit={this.handleSubmit}>
+                            <input className="name_prod" type="text" name="name_prod" placeholder="name" value={this.state.name_prod} onChange={this.handleChange} />
+                            <div className="errors">{ this.state.errors.name ? this.state.errors.name : null}</div>
+                            <input className="description_prod" type="text" name="description" placeholder="Description" value={this.state.description} onChange={this.handleChange} />
+                            <div className="errors">{ this.state.errors.description ? this.state.errors.description : null}</div>
+                            <div className="errors">{ this.state.errors.message ? this.state.errors.message : null}</div>
+                            <input className="submit" type="submit" value= "Add Product" />
+
+                        </form>
+                    </div>
+                </SkyLight>
+
+                <div className="productRow">
+                    <div className="productRow__info">
+                        {this.state.products.map(product => 
+                        <div key={product.id}><div className="el"><h2>{product.name}</h2>  <p>{product.description}</p></div>
+                            <hr className="product_line" />
+                        </div>)}
+                    
+                    </div>
+                </div>         
             </div>
         )
     }

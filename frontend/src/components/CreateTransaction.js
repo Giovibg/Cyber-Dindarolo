@@ -16,6 +16,7 @@ class CreateTransaction extends Component{
             currency:"EUR",
             errors:{},
             list_product: [],
+            update_budget: false,
             message: {}
         };
 
@@ -56,9 +57,8 @@ class CreateTransaction extends Component{
             });
             console.log("res:",response.data.message)
             this.setState({message : response.data});
-            window.location.reload(); 
-            
-            
+            this.setState({update_budget: true})
+            this.props.action();
             return response;
         } catch (error) {
             console.log(error.response.data);
@@ -90,6 +90,7 @@ class CreateTransaction extends Component{
     
 
     render(){
+        
         const customStyles = {
             menu: (provided, state) => ({
               ...provided,
@@ -103,29 +104,30 @@ class CreateTransaction extends Component{
               width: width
             })
             
-          }
+        }
 
         const options = [
             { value: "UP", label: "UP" },
             { value: "DOWN", label: "DOWN" }
-          ]
+        ]
+
         return(
             
             <div className="tr">
                 <div className="title_create">
-                <h1>Create Transaction</h1>
+                    <h1>Create Transaction</h1>
                 </div>
                 <div className="form_trans">
                     <form onSubmit={this.handleSubmit}>
                         <div className="custom_select">
                             Select product
-                        <Select className="selection"
-                            value={this.state.product_name}
-                            onChange={this.stateChange_p}
-                            options={this.state.list_product.map(t=> ({value: t.id, label: t.name}))}
-                            placeholder={this.state.product_name}
-                            styles={customStyles}
-                        />
+                            <Select className="selection"
+                                value={this.state.product_name}
+                                onChange={this.stateChange_p}
+                                options={this.state.list_product.map(t=> ({value: t.id, label: t.name}))}
+                                placeholder={this.state.product_name}
+                                styles={customStyles}
+                            />
                         </div>
                         <div className="errors">{ this.state.errors.product ? this.state.errors.product : null}</div>
                         Unit price
@@ -139,17 +141,17 @@ class CreateTransaction extends Component{
                         
                         <div className="custom_select">
                             Transaction Type
-                        <Select className="selection"
-                            value={this.state.trans_type}
-                            onChange={this.stateChange_t}
-                            options={options}
-                            placeholder={this.state.trans_type}
-                            styles={customStyles}
-                        />
+                            <Select className="selection"
+                                value={this.state.trans_type}
+                                onChange={this.stateChange_t}
+                                options={options}
+                                placeholder={this.state.trans_type}
+                                styles={customStyles}
+                            />
                         </div>
                         <div className="errors">{this.state.errors.trans_type ? this.state.errors.trans_type : null}</div>
                         
-                        <input className="submit" type="submit" value= "Create Transaction" />
+                        <input className="submit" type="submit" value= "Create Transaction" onEnded={this.props.action}/>
                         <div className="errors">{ this.state.errors.message ? this.state.errors.message : null}</div>
                         <div className="created">{ this.state.message.message ? this.state.message.message : null}</div>
                     </form>

@@ -42,11 +42,12 @@ class Register extends Component{
             console.log("AT "+ response.data.access)
             window.location.href = "/#/home/";
             return response;
+
         } catch (error) {
             console.log(error.response.data);
-        this.setState({
-            errors:error.response.data
-        });
+            this.setState({
+                errors:error.response.data
+            });
         }
     }
     

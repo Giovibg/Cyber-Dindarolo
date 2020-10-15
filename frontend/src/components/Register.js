@@ -28,7 +28,7 @@ class Register extends Component{
                 localStorage.setItem('access_token', null);
                 localStorage.setItem('refresh_token', null);
                 localStorage.setItem('username', null);
-                const response =  await axios.post('/jwt_auth/register/', {
+                const response =  await APIrequest.post('/jwt_auth/register/', {
                 username: this.state.username,
                 email: this.state.email,
                 password: this.state.password,
@@ -39,7 +39,6 @@ class Register extends Component{
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
             localStorage.setItem('username',this.state.username)
-            console.log("AT "+ response.data.access)
             window.location.href = "/#/home/";
             return response;
 

@@ -55,7 +55,12 @@ class Detail extends Component {
                   <td className="detail__element">{this.props.transact.trans_type}</td>
                   <td className="detail__element">{this.props.transact.currency}</td>
                   <td className="detail__element">{(this.props.transact.transaction_timestamp).substring(0, 10)}</td>
-                  <td className="detail__element">{this.props.transact.subtotal} €</td>
+                  {this.props.transact.subtotal < 0 && (
+                  <td className="detail__element_n">{this.props.transact.subtotal} €</td>
+                  )}
+                 {this.props.transact.subtotal > 0 && (
+                  <td className="detail__element_p">+{this.props.transact.subtotal} €</td>
+                  )}
 
                 </tr>
               </tbody>

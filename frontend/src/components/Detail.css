@@ -5,6 +5,20 @@
     text-transform: uppercase;
     font-size: large;
 }
+.detail__element_n{
+    
+    padding:90px;
+    text-transform: uppercase;
+    font-size: large;
+    color:red;
+}
+.detail__element_p{
+    
+    padding:90px;
+    text-transform: uppercase;
+    font-size: large;
+    color:lightgreen;
+}
 
 .detail__table
 {
@@ -21,3 +35,4 @@
     text-transform: uppercase;
     font-size: large;
 }
+

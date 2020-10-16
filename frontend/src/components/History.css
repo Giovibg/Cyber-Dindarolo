@@ -51,6 +51,30 @@
     border:none;
     
 }
+.history__element_n{
+    border: 0;
+    table-layout: fixed;
+    width:100%;
+    border-style: hidden;
+    margin:30px;
+    font-size: medium;
+    align-items: center;
+    border:none;
+    color:red;
+    
+}
+.history__element_p{
+    border: 0;
+    table-layout: fixed;
+    width:100%;
+    border-style: hidden;
+    margin:30px;
+    font-size: medium;
+    align-items: center;
+    border:none;
+    color:lightgreen;
+    
+}
 .history__table:hover{
     /*cursor: pointer;*/
     background-color: black;
@@ -63,3 +87,8 @@
     border:none;
     
 }
+.negative{
+    color:red;
+    
+}
+

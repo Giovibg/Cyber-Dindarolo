@@ -71,7 +71,12 @@ class History extends Component {
               <tr key={transaction.id} className="history__table" onClick={() => this.handleClick(transaction)}>
                 <td className="history__element">{transaction.product_name}</td>
                 <td className="history__element">{(transaction.transaction_timestamp).substring(0, 10)}</td>
-                <td className="history__element">{transaction.subtotal} €</td>
+                {transaction.subtotal < 0 && (
+                <td className="history__element_n">{transaction.subtotal} €</td>
+                )}
+                 {transaction.subtotal > 0 && (
+                <td className="history__element_p">+{transaction.subtotal} €</td>
+                )}
               </tr>)}
             </tbody>
             

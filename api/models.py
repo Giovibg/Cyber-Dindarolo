@@ -7,17 +7,18 @@ from django.utils import timezone
 class Product(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField(blank=True, max_length=100)
-
+    quantity = models.IntegerField()
+    unit_price = models.FloatField()
     def __str__(self):
         return f'{self.name}'
 
 class Transaction(models.Model):
-    owner = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)
-    unit_price = models.FloatField()
+    unit_price = models.FloatField(default=0.01)
     quantity = models.IntegerField()
     subtotal = models.FloatField(blank=True, default=0)
-    trans_type = models.CharField(max_length=4, default="DOWN")
+    #trans_type = models.CharField(max_length=4, default="DOWN")
     currency = models.CharField(max_length=3)
     transaction_timestamp = models.DateTimeField(auto_now_add=True)
     
@@ -25,6 +26,6 @@ class Transaction(models.Model):
         ordering = ['-transaction_timestamp']
 
 class Budget(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     budget = models.FloatField(default=0.00)
 

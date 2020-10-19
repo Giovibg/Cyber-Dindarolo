@@ -20,27 +20,74 @@ class IsOwner(permissions.BasePermission):
 
 class ProductViewSet(APIView):
 
-    #Insert product if not already available
+    #Insert product with quantity and unit price. If already available, update it
     #@action(detail=False, methods=['POST'])
-    def post(self, request):
+    def put(self, request):
         product_serializer = ProductSerializer(data=request.data)
         if product_serializer.is_valid():
+           
+            #Get back old budget for user
+            try:
+                budget = Budget.objects.get(user=self.request.user)
+            except:
+                budget = Budget(user = self.request.user, budget = 0)
+                budget.save()
+                budget = Budget.objects.get(user=self.request.user)
+            budget_serial = BudgetSerializer(budget)
+            old_budget = budget_serial.data['budget']
+            print("old budget", old_budget)
+
+            print("name:",product_serializer)
+            total = product_serializer.validated_data['quantity'] * product_serializer.validated_data['unit_price']
+
+            #Update budget
+            old_budget += total
+            new_budget = round(float(old_budget), 2)
+            budget.budget = new_budget
+            print("new budget: "+ str(new_budget))
+            budget.save()
+            print("budget", old_budget)
+
             #Check if product already exists
             name = request.data['name']
             products = Product.objects.all()
             for prod in products:
                 if prod.name == name:
-                    response = {'message': 'product already available'}
-                    return Response(response, status=status.HTTP_400_BAD_REQUEST)
+                
+                    #Get old quantity
+                    old_quantity = prod.quantity
+                    old_price = prod.unit_price
+                
+                    #Update quantity and price
+                    new_quantity = old_quantity + product_serializer.validated_data['quantity']
+                    new_unit_price = ((old_quantity * old_price) + (product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] )) / new_quantity
+                    new_unit_price = round(float(new_unit_price), 2)
+                    prod.unit_price = new_unit_price
+                    prod.quantity = new_quantity
+                    prod.save()
+
+                    #Update History
+                    t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ), currency='EUR')
+                    t.save()
+                    response = {'message': 'product modified'}
+                    return Response(response, status=status.HTTP_200_OK)
+
+            #Add product
             
             product_serializer.save()
+            prod = Product.objects.get(name=product_serializer.validated_data['name'])
+            print("prodotto:",prod)
+            t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ), currency='EUR')
+            t.save()
+            #Update history
+
             response = {'message': 'product added'}
             return Response(response, status=status.HTTP_201_CREATED)
         return Response(product_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
     #Get all products
     
-   # @permission_classes([IsAuthenticated])
+    #@permission_classes([IsAuthenticated])
     def get(self,request):
         all_products = Product.objects.all()
         serializer = ProductSerializer(all_products, many=True)
@@ -66,12 +113,20 @@ class TransactionViewSet(APIView):
         user = self.request.user
         if serializer.is_valid():
             total = 0
-            if serializer.validated_data['trans_type'] == 'DOWN':
-                total = -serializer.validated_data['quantity'] * serializer.validated_data['unit_price']
-                print(total)
-            elif serializer.validated_data['trans_type'] == 'UP':
-                total = serializer.validated_data['quantity'] * serializer.validated_data['unit_price']
-                print(total)
+            print("prodotto:", serializer.validated_data['product'])
+            #Get back product choosen and check availability
+            try:
+                product = Product.objects.get(name=serializer.validated_data['product'])
+            except:
+                response = {'message': 'product not available'}
+                return Response(response, status=status.HTTP_400_BAD_REQUEST)
+            product_serial = ProductSerializer(product)
+
+            if(serializer.validated_data['quantity'] > product_serial.data['quantity']):
+                response = {'message': 'Not sufficient quantity available'}
+                return Response(response, status=status.HTTP_400_BAD_REQUEST)
+            print("prezzo unitario:",product_serial.data['unit_price'])
+            total = -serializer.validated_data['quantity'] * product_serial.data['unit_price']
 
             #Get back old budget value
             try:
@@ -86,7 +141,7 @@ class TransactionViewSet(APIView):
             
             print("budget", old_budget)
             
-            #Update only if positive budget
+            #Update budget only if positive budget
             if (old_budget + total) >= 0:
                 old_budget += total
                 new_budget = round(float(old_budget), 2)
@@ -95,12 +150,15 @@ class TransactionViewSet(APIView):
 
                 budget.save()
                 total = round(float(total), 2)
-                serializer.save(subtotal = total, owner = self.request.user)
+                #Update History
+                serializer.save(subtotal = total, owner = self.request.user, unit_price = product_serial.data['unit_price'])
                          
-                #serializer.save(subtotal = total)
-                #serializer.save(owner=self.request.user)
-                #serializer.save()
-                
+                #Update Product quantity
+                old_quantity_prod = product_serial.data['quantity']
+                new_quantity_prod = old_quantity_prod - serializer.validated_data['quantity']
+                product.quantity = new_quantity_prod
+                product.save()
+
                 response = {'message':'Created transaction'}
                 return Response(response, status=status.HTTP_200_OK)
             else:

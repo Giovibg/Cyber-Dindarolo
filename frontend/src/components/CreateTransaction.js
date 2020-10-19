@@ -10,8 +10,7 @@ class CreateTransaction extends Component{
         this.state = {
             product_name: '',
             product_id: null,
-            unit_price: 0.01,
-            trans_type:"",
+            unit_price: 0.00,
             quantity:1,
             currency:"EUR",
             errors:{},
@@ -24,11 +23,12 @@ class CreateTransaction extends Component{
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getMessage = this.getMessage.bind(this);
         this.stateChange_p = this.stateChange_p.bind(this);
-        this.stateChange_t = this.stateChange_t.bind(this);
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
+        this.setState({errors:{}})
+        this.setState({message:{}})
         console.log(`option selected: `, this.state.product_name)
     }
 
@@ -36,18 +36,17 @@ class CreateTransaction extends Component{
         console.log(product_name)
         this.setState({product_id:product_name.value})
         this.setState({product_name:product_name.label})
+        this.setState({unit_price:product_name.unit_price})
+        console.log("unit price", product_name.unit_price);
+        this.setState({errors:{}})
+        this.setState({message:{}})
     }
-
-    stateChange_t = trans_type =>{
-        console.log(trans_type)
-        this.setState({trans_type:trans_type.value})
-    }
-
     
 
     async handleSubmit(event) {
         event.preventDefault();
         try {
+                
                 const response =  await APIrequest.put('/api/transactions/', {
                 product: this.state.product_id,
                 unit_price: this.state.unit_price,
@@ -106,52 +105,32 @@ class CreateTransaction extends Component{
             
         }
 
-        const options = [
-            { value: "UP", label: "UP" },
-            { value: "DOWN", label: "DOWN" }
-        ]
-
         return(
             
             <div className="tr">
                 <div className="title_create">
-                    <h1>Create Transaction</h1>
+                    <h1>Buy Product</h1>
                 </div>
                 <div className="form_trans">
                     <form onSubmit={this.handleSubmit}>
                         <div className="custom_select">
-                            Select product
+                            Choose a product
                             <Select className="selection"
                                 value={this.state.product_name}
                                 onChange={this.stateChange_p}
-                                options={this.state.list_product.map(t=> ({value: t.id, label: t.name}))}
+                                options={this.state.list_product.map(t=> ({value: t.id, label: t.name, unit_price: t.unit_price}))}
                                 placeholder={this.state.product_name}
                                 styles={customStyles}
                             />
                         </div>
                         <div className="errors">{ this.state.errors.product ? this.state.errors.product : null}</div>
-                        Unit price
-                        <input className="unit_price" type="number" step="0.01" min="0" name="unit_price" placeholder="Unit Price" value={this.state.unit_price} onChange={this.handleChange}/>
-                        
-                        <div className="errors">{ this.state.errors.unit_price ? this.state.errors.unit_price : null}</div>
                         Quantity
                         <input className="quantity" type="number" name="quantity" min="1" placeholder="Quantity" value={this.state.quantity} onChange={this.handleChange}/>
-                        
+                        {this.state.unit_price > 0 && ( <div>{this.state.unit_price}€ each </div>)}
+                         
                         <div className="errors">{this.state.errors.quantity ? this.state.errors.quantity : null}</div>
-                        
-                        <div className="custom_select">
-                            Transaction Type
-                            <Select className="selection"
-                                value={this.state.trans_type}
-                                onChange={this.stateChange_t}
-                                options={options}
-                                placeholder={this.state.trans_type}
-                                styles={customStyles}
-                            />
-                        </div>
-                        <div className="errors">{this.state.errors.trans_type ? this.state.errors.trans_type : null}</div>
-                        
-                        <input className="submit" type="submit" value= "Create Transaction" onEnded={this.props.action}/>
+        
+                        <input className="submit" type="submit" value= "Buy" onEnded={this.props.action}/>
                         <div className="errors">{ this.state.errors.message ? this.state.errors.message : null}</div>
                         <div className="created">{ this.state.message.message ? this.state.message.message : null}</div>
                     </form>

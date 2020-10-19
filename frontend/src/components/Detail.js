@@ -42,7 +42,6 @@ class Detail extends Component {
                   <td>Product</td>
                   <td>Unit Price</td>
                   <td>quantity</td>
-                  <td>type</td>
                   <td>currency</td>
                   <td>date</td>
                   <td>subtotal</td>
@@ -52,7 +51,6 @@ class Detail extends Component {
                   <td className="detail__element">{this.props.transact.product_name}</td>
                   <td className="detail__element">{this.props.transact.unit_price}</td>
                   <td className="detail__element">{this.props.transact.quantity}</td>
-                  <td className="detail__element">{this.props.transact.trans_type}</td>
                   <td className="detail__element">{this.props.transact.currency}</td>
                   <td className="detail__element">{(this.props.transact.transaction_timestamp).substring(0, 10)}</td>
                   {this.props.transact.subtotal < 0 && (

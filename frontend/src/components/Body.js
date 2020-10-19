@@ -45,7 +45,7 @@ class Body extends Component{
                 <Switch>
                     <Route exact path={this.props.path}  render={(props) => <CreateTransaction {...props} action={this.getMessage} budget={this.state.budget}  />} />
                     <Route path={`${this.props.path}/history`} component={History} />
-                    <Route path={`${this.props.path}/products`} component={Products} />
+                    <Route path={`${this.props.path}/products`} render={(props) => <Products {...props} action={this.getMessage}  />} />
                 </Switch>
 
             </div>

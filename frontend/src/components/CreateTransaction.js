@@ -49,10 +49,9 @@ class CreateTransaction extends Component{
                 
                 const response =  await APIrequest.put('/api/transactions/', {
                 product: this.state.product_id,
-                unit_price: this.state.unit_price,
-                trans_type: this.state.trans_type,
                 quantity:this.state.quantity,
                 currency:this.state.currency
+                
             });
             console.log("res:",response.data.message)
             this.setState({message : response.data});

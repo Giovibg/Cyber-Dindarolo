@@ -6,10 +6,12 @@
     align-items: center;
     color: white;
 }
+
 .el:hover{
     padding-left: 20px;
 
 }
+
 .add_prod{
     display: flex;
     justify-content: space-between;
@@ -26,7 +28,6 @@
 .product_line{
     color:white;
     border: 1px solid #585858;
-    
 }
 
 .add_btn{
@@ -47,6 +48,7 @@
     border: none;
     margin-top: 15px;
 }
+
 .description_prod{
     display:flex; 
     flex-direction: column;
@@ -61,6 +63,7 @@
     border: none;
     margin-top: 15px;
 }
+
 .errors{
     color:red;
     font-size: 13px;

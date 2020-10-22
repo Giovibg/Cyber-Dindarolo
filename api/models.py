@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 # Create your models here.
 
@@ -16,7 +16,7 @@ class Transaction(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)
     unit_price = models.FloatField(default=0.01)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(validators=[MinValueValidator(1)])
     subtotal = models.FloatField(blank=True, default=0)
     #trans_type = models.CharField(max_length=4, default="DOWN")
     currency = models.CharField(max_length=3)

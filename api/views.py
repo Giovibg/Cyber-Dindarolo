@@ -35,18 +35,18 @@ class ProductViewSet(APIView):
                 budget = Budget.objects.get(user=self.request.user)
             budget_serial = BudgetSerializer(budget)
             old_budget = budget_serial.data['budget']
-            print("old budget", old_budget)
+            #print("old budget", old_budget)
 
-            print("name:",product_serializer)
+            #print("name:",product_serializer)
             total = product_serializer.validated_data['quantity'] * product_serializer.validated_data['unit_price']
 
             #Update budget
             old_budget += total
             new_budget = round(float(old_budget), 2)
             budget.budget = new_budget
-            print("new budget: "+ str(new_budget))
+            #print("new budget: "+ str(new_budget))
             budget.save()
-            print("budget", old_budget)
+            #print("budget", old_budget)
 
             #Check if product already exists
             name = request.data['name']
@@ -73,14 +73,13 @@ class ProductViewSet(APIView):
                     return Response(response, status=status.HTTP_200_OK)
 
             #Add product
-            
             product_serializer.save()
             prod = Product.objects.get(name=product_serializer.validated_data['name'])
-            print("prodotto:",prod)
+            #print("prodotto:",prod)
             t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ), currency='EUR')
             t.save()
-            #Update history
 
+            #Update history
             response = {'message': 'product added'}
             return Response(response, status=status.HTTP_201_CREATED)
         return Response(product_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
@@ -113,7 +112,7 @@ class TransactionViewSet(APIView):
         user = self.request.user
         if serializer.is_valid():
             total = 0
-            print("prodotto:", serializer.validated_data['product'])
+            #print("prodotto:", serializer.validated_data['product'])
             #Get back product choosen and check availability
             try:
                 product = Product.objects.get(name=serializer.validated_data['product'])
@@ -125,7 +124,7 @@ class TransactionViewSet(APIView):
             if(serializer.validated_data['quantity'] > product_serial.data['quantity']):
                 response = {'message': 'Not sufficient quantity available'}
                 return Response(response, status=status.HTTP_400_BAD_REQUEST)
-            print("prezzo unitario:",product_serial.data['unit_price'])
+            #print("prezzo unitario:",product_serial.data['unit_price'])
             total = -serializer.validated_data['quantity'] * product_serial.data['unit_price']
 
             #Get back old budget value
@@ -139,14 +138,14 @@ class TransactionViewSet(APIView):
             budget_serial = BudgetSerializer(budget)
             old_budget = budget_serial.data['budget']
             
-            print("budget", old_budget)
+            #print("budget", old_budget)
             
             #Update budget only if positive budget
             if (old_budget + total) >= 0:
                 old_budget += total
                 new_budget = round(float(old_budget), 2)
                 budget.budget = new_budget
-                print("new budget: "+ str(new_budget))
+                #print("new budget: "+ str(new_budget))
 
                 budget.save()
                 total = round(float(total), 2)
@@ -172,8 +171,13 @@ class BudgetViewSet(APIView):
     def get(self, request):
         user = self.request.user
         if user.is_authenticated:
-            budget1 = Budget.objects.filter(user=self.request.user)
-            serializer_class = BudgetSerializer(budget1, many=True)
+            try:
+                budget = Budget.objects.get(user=self.request.user)
+            except:
+                budget = Budget(user = self.request.user, budget = 0)
+                budget.save()
+                budget = Budget.objects.get(user=self.request.user)
+            serializer_class = BudgetSerializer(budget)
 
             return Response(serializer_class.data)
         raise PermissionDenied()

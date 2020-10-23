@@ -21,9 +21,9 @@ class Body extends Component{
         try {
             let response = await APIrequest.get('/api/budget/');
             const message = response.data;
-            console.log(message[0].budget)
+            console.log("message:",message.budget)
             this.setState({
-                budget: message[0].budget,
+                budget: message.budget,
             });
             return message;
         }catch(error){

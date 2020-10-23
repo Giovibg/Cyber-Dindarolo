@@ -72,10 +72,10 @@ class History extends Component {
                 <td className="history__element">{transaction.product_name}</td>
                 <td className="history__element">{(transaction.transaction_timestamp).substring(0, 10)}</td>
                 {transaction.subtotal < 0 && (
-                <td className="history__element_n">{transaction.subtotal} €</td>
+                <td className="history__element_n">{(transaction.subtotal).toFixed(2)} €</td>
                 )}
                  {transaction.subtotal > 0 && (
-                <td className="history__element_p">+{transaction.subtotal} €</td>
+                <td className="history__element_p">+{(transaction.subtotal).toFixed(2)} €</td>
                 )}
               </tr>)}
             </tbody>

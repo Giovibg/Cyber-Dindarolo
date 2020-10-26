@@ -50,7 +50,7 @@ Main API features:
 
 
 
--Make a transaction(buy something):	Each user can buy a product, previously inserted from someone, putting name of product and quantity of pieces we want to buy to /api/transactions/
+-Make a transaction(buy something available in the portal):	Each user can buy a product, previously inserted from someone, choosing product and quantity of pieces we want to buy to /api/transactions/
 				   	If sufficient budget, if sufficient quantity available => Transaction created. New budget for user = old_budget - (quantity_bought * unit_price_product).
 
 

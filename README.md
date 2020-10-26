@@ -41,31 +41,40 @@ Applicazioni Web e Mobile Project - UNIMORE
 - Nobody which is not authenticated can't interact with the portal.
 
 - Authentication with JWT:	
-                - register account posting username, email,password,confirm password at /jwt_auth/register/.
-                - login (if account available) posting username and password at: /api/token/.
-				- Both login and register returns an Access Token(valid for 5minutes) and a Refresh token(valid for 24h).
-
-
-			
-
-- Add product:			-Each user can add a product (and gain a credit), putting `name`, `description`, `quantity` and `unit_price` to `/api/products/` . Product inserted will be available for all other users.
-- If a product is already available:
-					- new quantity available = previous quantity available + `quantity`.
-					- new unit price for product will be weighted:  ((previous unit_price * previous quantity) + (new unit_price * new_quantity)) / total_quantity)
-
-				- New budget available for user: old budget available + (quantity * unit_price)
+    - register account posting `username`, `email`(UNIQUE), `password`, `confirm password` at `/jwt_auth/register/`.
+    - login (if account available) posting `username` and `password` at: `/api/token/`.
+	- Both login and register returns an `Access Token`(valid for 5 minutes) and a `Refresh token`(valid for 24h).
 
 
 
-- Make a transaction(buy something available in the portal):	Each user can buy a product, previously inserted from someone, choosing `product` and `quantity` of pieces we want to buy to /api/transactions/
-				   	If sufficient budget, if sufficient quantity available => Transaction created. New budget for user = old_budget - (quantity_bought * unit_price_product).
+- Add product:			
+Each user can add a product (and gain a credit), putting `name`, `description`, `quantity` and `unit_price` to `/api/products/` . 
+ Product inserted will be available for all other users.
+ 
+    - If the product inserted is already available, quantity and unit_price will be updated:
+    
+	    - `new_quantity_available` = `previous_quantity_available` + `quantity_inserted`.
+	
+	    - new unit price for product will be weighted:  ((`previous unit_price` * `previous quantity`) + (`new unit_price` * `new_quantity`)) / `total_quantity`)
+
+	    - `new_budget_available` for user: `old_budget _available` + (`quantity` * `unit_price`)
 
 
-- View list of all products available inserted by users: - GET at /api/products/ 	=> return: `product_name`, `description`, `quantity_available`, `weighted unit_price` 
 
-- View History of transactions made by an user, positive and negative:		-GET /api/transactions/   => return: list of `product name`, `quantity`, `unit_price`, `subtotal`, `currency`, `date of transaction`, `type of transaction`(positive or negative transaction)
+- Make a transaction(buy something available in the portal):	Each user can buy a product, previously inserted from someone, choosing `product` and inserting `quantity` of pieces we want to buy to `/api/transactions/`:
 
-- Obtain budget available for current user: - GET /api/budget => return `user_id`, `budget available`
+	- If sufficient budget, if sufficient quantity available => Transaction created. `New budget` for user = `old_budget` - (`quantity_bought` * `unit_price_product`).
+
+
+- View list of all products available inserted by users:
+
+    - GET at `/api/products/` 	=> return: `product_name`, `description`, `quantity_available`, `weighted unit_price` 
+
+- View History of transactions made by an user, positive and negative:
+    - GET `/api/transactions/`   => return: list of `product name`, `quantity`, `unit_price`, `subtotal`, `currency`, `date of transaction`, `type of transaction`(positive or negative transaction)
+
+- Obtain budget available for current user: 
+    - GET `/api/budget` => return `user_id`, `budget available`
 
 
 

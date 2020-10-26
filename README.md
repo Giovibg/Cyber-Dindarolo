@@ -38,9 +38,9 @@ Applicazioni Web e Mobile Project - UNIMORE
 
 ## API Features
 
--Nobody which is not authenticated can't interact with the portal.
+- Nobody which is not authenticated can't interact with the portal.
 
--Authentication with JWT:	
+- Authentication with JWT:	
                 - register account posting username, email,password,confirm password at /jwt_auth/register/.
                 - login (if account available) posting username and password at: /api/token/.
 				- Both login and register returns an Access Token(valid for 5minutes) and a Refresh token(valid for 24h).
@@ -48,8 +48,8 @@ Applicazioni Web e Mobile Project - UNIMORE
 
 			
 
--Add product:			-Each user can add a product (and gain a credit), putting `name`, `description`, `quantity` and `unit_price` to `/api/products/` . Product inserted will be available for all other users
-				-If a product is already available:
+- Add product:			-Each user can add a product (and gain a credit), putting `name`, `description`, `quantity` and `unit_price` to `/api/products/` . Product inserted will be available for all other users.
+- If a product is already available:
 					- new quantity available = previous quantity available + `quantity`.
 					- new unit price for product will be weighted:  ((previous unit_price * previous quantity) + (new unit_price * new_quantity)) / total_quantity)
 
@@ -57,15 +57,15 @@ Applicazioni Web e Mobile Project - UNIMORE
 
 
 
--Make a transaction(buy something available in the portal):	Each user can buy a product, previously inserted from someone, choosing `product` and `quantity` of pieces we want to buy to /api/transactions/
+- Make a transaction(buy something available in the portal):	Each user can buy a product, previously inserted from someone, choosing `product` and `quantity` of pieces we want to buy to /api/transactions/
 				   	If sufficient budget, if sufficient quantity available => Transaction created. New budget for user = old_budget - (quantity_bought * unit_price_product).
 
 
--View list of all products available inserted by users: - GET at /api/products/ 	=> return: `product_name`, `description`, `quantity_available`, `weighted unit_price` 
+- View list of all products available inserted by users: - GET at /api/products/ 	=> return: `product_name`, `description`, `quantity_available`, `weighted unit_price` 
 
--View History of transactions made by an user, positive and negative:		-GET /api/transactions/   => return: list of `product name`, `quantity`, `unit_price`, `subtotal`, `currency`, `date of transaction`, `type of transaction`(positive or negative transaction)
+- View History of transactions made by an user, positive and negative:		-GET /api/transactions/   => return: list of `product name`, `quantity`, `unit_price`, `subtotal`, `currency`, `date of transaction`, `type of transaction`(positive or negative transaction)
 
--Obtain budget available for current user: - GET /api/budget => return `user_id`, `budget available`
+- Obtain budget available for current user: - GET /api/budget => return `user_id`, `budget available`
 
 
 

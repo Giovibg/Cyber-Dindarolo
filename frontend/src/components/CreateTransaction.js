@@ -12,7 +12,6 @@ class CreateTransaction extends Component{
             product_id: null,
             unit_price: 0.00,
             quantity:1,
-            currency:"EUR",
             errors:{},
             list_product: [],
             update_budget: false,
@@ -49,8 +48,7 @@ class CreateTransaction extends Component{
                 
                 const response =  await APIrequest.put('/api/transactions/', {
                 product: this.state.product_id,
-                quantity:this.state.quantity,
-                currency:this.state.currency
+                quantity:this.state.quantity
                 
             });
             console.log("res:",response.data.message)

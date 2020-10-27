@@ -67,7 +67,7 @@ class ProductViewSet(APIView):
                     prod.save()
 
                     #Update History
-                    t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ), currency='EUR')
+                    t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ))
                     t.save()
                     response = {'message': 'product modified'}
                     return Response(response, status=status.HTTP_200_OK)
@@ -76,7 +76,7 @@ class ProductViewSet(APIView):
             product_serializer.save()
             prod = Product.objects.get(name=product_serializer.validated_data['name'])
             #print("prodotto:",prod)
-            t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ), currency='EUR')
+            t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ))
             t.save()
 
             #Update history
@@ -159,7 +159,7 @@ class TransactionViewSet(APIView):
                 product.save()
 
                 response = {'message':'Created transaction'}
-                return Response(response, status=status.HTTP_200_OK)
+                return Response(response, status=status.HTTP_201_CREATED)
             else:
                 response = {'message':'Not sufficient budget'}
                 return Response(response,status=status.HTTP_400_BAD_REQUEST)

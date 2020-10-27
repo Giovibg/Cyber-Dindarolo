@@ -8,6 +8,7 @@ Applicazioni Web e Mobile Project - UNIMORE
 - Django
 - React
 - React Native with EXPO
+- Node, npm
 
 ## Folders project navigation:
 
@@ -24,8 +25,8 @@ Applicazioni Web e Mobile Project - UNIMORE
 - Run Server: `python3 manage.py runserver <IP:port>` (default localhost:8000)
 - If Server IP different from default: 
 1. Add your IP to `ALLOWED_HOSTS` list in `/backend/settings.py`
-2. Replace `baseURL` variable with your IP and port in: `/frontent/src/apiServices.js` and `DindaroloMobile/components/apiServices.js`
-
+2. Replace `baseURL` variable with your IP and port in: `/frontend/src/apiServices.js` and `DindaroloMobile/components/apiServices.js`
+3. `cd frontend/ && npm run build` to update changes
 
 ## Project specs agreed
 
@@ -41,7 +42,7 @@ Applicazioni Web e Mobile Project - UNIMORE
 - Nobody which is not authenticated can't interact with the portal.
 
 - Authentication with JWT:	
-    - register account posting `username`, `email`(UNIQUE), `password`, `confirm password` at `/jwt_auth/register/`.
+    - register account posting `username`, `email`(UNIQUE), `password`, `password2` at `/jwt_auth/register/`.
     - login (if account available) posting `username` and `password` at: `/api/token/`.
 	- Both login and register returns an `Access Token`(valid for 5 minutes) and a `Refresh token`(valid for 24h).
 

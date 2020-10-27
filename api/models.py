@@ -19,13 +19,12 @@ class Transaction(models.Model):
     quantity = models.IntegerField(validators=[MinValueValidator(0)])
     subtotal = models.FloatField(blank=True, default=0)
     #trans_type = models.CharField(max_length=4, default="DOWN")
-    currency = models.CharField(max_length=3)
     transaction_timestamp = models.DateTimeField(auto_now_add=True)
     
     class Meta:
         ordering = ['-transaction_timestamp']
 
 class Budget(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     budget = models.FloatField(default=0.00)
 

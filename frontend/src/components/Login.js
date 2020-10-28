@@ -3,6 +3,7 @@ import "./Login.css"
 import { Link } from 'react-router-dom'
 import APIrequest from "../apiServices"
 import Body from "./Body"
+import Generics from "../Generics"
 class Login extends Component{
     constructor(props){
         super(props);
@@ -46,6 +47,11 @@ class Login extends Component{
             }
             
     } 
+    componentDidMount(){
+        if(Generics.isAuthenticated()){
+            window.location.href = "/#/home/";
+        }
+    }
 
     render(){
         return(

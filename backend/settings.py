@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'jwt_auth',
     'rest_framework.authtoken',
     'frontend',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 

@@ -6,6 +6,7 @@ import History from "./History"
 import CreateTransaction from "./CreateTransaction"
 import { HashRouter, Route, Switch} from 'react-router-dom'
 import APIrequest from "../apiServices";
+import Generics from "../Generics"
 
 class Body extends Component{
     constructor(props) {

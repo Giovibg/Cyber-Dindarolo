@@ -7,4 +7,9 @@
 .header_budget{
     color: #1DB954;
     margin-top:20px;
+    display: flex;
+    justify-content: space-between;
+}
+.logout{
+    cursor: pointer;
 }

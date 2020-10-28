@@ -6,9 +6,23 @@ class Header extends Component {
         super(props);
         this.state = {
         };
-
+        this.logOut = this.logOut.bind(this);
     }
-    
+    async logOut() {
+        try {
+            const refresh_token = localStorage.getItem('refresh_token');
+            const response = await APIrequest.post('/jwt_auth/blacklist/', {
+                refresh_token: refresh_token
+            });
+            APIrequest.defaults.headers['Authorization'] = null;
+            localStorage.removeItem('refresh_token')
+            localStorage.removeItem('access_token')
+            window.location.href = "/#/login/";
+            return response
+        } catch (error) {
+            throw error;
+        }
+    }
     render(){
         return (
             <div className="header">
@@ -19,6 +33,7 @@ class Header extends Component {
 
                 <div className="header_right">
                     <h4>{localStorage.getItem('username')}</h4>
+                    <a className="logout" onClick={() => this.logOut()}>logout</a>
                 </div>
             </div>
         )

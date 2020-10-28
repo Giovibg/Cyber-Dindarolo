@@ -8,6 +8,9 @@ from rest_framework import response, decorators, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import UserSerializer
+from rest_framework_simplejwt.token_blacklist.models import (
+    BlacklistedToken, OutstandingToken,
+)
 
 
 User = get_user_model()
@@ -27,4 +30,18 @@ def registration(request):
         return Response(res, status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+@decorators.api_view(["POST"])
+@decorators.permission_classes([permissions.AllowAny])
+def blacklist(request):
+    try:    
+        refresh_token = request.data["refresh_token"]
+        token = RefreshToken(refresh_token)
+        token.blacklist()
+        return Response(status=status.HTTP_205_RESET_CONTENT)
+    except:
+        response = {'message':'Not valid Token'}
+        return Response(response,status=status.HTTP_400_BAD_REQUEST)
+        
 

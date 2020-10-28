@@ -4,6 +4,7 @@ import axios from 'axios'
 import APIrequest from '../apiServices'
 import Select from 'react-select'
 import Header from './Header'
+import Generics from "../Generics"
 class CreateTransaction extends Component{
     constructor(props){
         super(props);
@@ -79,9 +80,7 @@ class CreateTransaction extends Component{
     }
     
     componentDidMount(){
-        
         this.getMessage();
-
     }
     
 

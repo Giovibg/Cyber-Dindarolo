@@ -18,6 +18,7 @@ class DindaroloTest(APITestCase):
         }
         response = self.client.post(url,data)
         self.token = response.data['access']
+        self.refresh = response.data['refresh']
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         #Insert a product
         self.product_1 = Product(name="Cavo", description="Audio", unit_price=11, quantity=3)
@@ -81,8 +82,7 @@ class DindaroloTest(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer '+ str(self.token))
         data = {
             "product":1,
-            "quantity":9,
-            "currency":"EUR"
+            "quantity":9
         }
         response = self.client.put(url,data)
         
@@ -94,8 +94,7 @@ class DindaroloTest(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer '+ str(self.token))
         data = {
             "product":1,
-            "quantity":3,
-            "currency":"EUR"
+            "quantity":3
         }
         response = self.client.put(url,data)
         
@@ -107,10 +106,16 @@ class DindaroloTest(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Bearer '+ str(self.token))
         data = {
             "product":1,
-            "quantity":15,
-            "currency":"EUR"
+            "quantity":15
         }
         response = self.client.put(url,data)
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        
-   
+
+    def test_Blacklist(self):
+        #Blacklist refresh token
+        url = 'http://localhost:8000/jwt_auth/blacklist/'
+        data = {
+            "refresh_token":self.refresh
+        }
+        response = self.client.put(url,data)
+        self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)        

@@ -1,6 +1,7 @@
 # Cyber Dindarolo
 
 Applicazioni Web e Mobile Project - UNIMORE
+Giovanni Bagnoli - 205960@studenti.unimore.it
 
 ## Requirements
 
@@ -12,22 +13,23 @@ Applicazioni Web e Mobile Project - UNIMORE
 
 ## Folders project navigation:
 
-- `/backend`: All general Django configurations of the backend(settings.py, urls...). 
+- `/backend`: Backend Django configurations (settings.py, urls...). 
 - `/api`: API management.
 - `/jwt_auth`: JWT authentication management.
-- `/frontend`: Web frontend developed in React
+- `/frontend`: Web frontend developed with React
 - `/mobile/DindaroloMobile`: Native app for Android developed with React Native
 
 ## Start Web and Mobile Project
 
 - (optional) Create python3 venv
-- Install backend requirements: `pip install -r requirements.txt`
+- Install requirements: `pip install -r requirements.txt`
 - Run Server: `python3 manage.py runserver <IP:port>` (default localhost:8000)
 - If Server IP different from default: 
-1. Add your IP to `ALLOWED_HOSTS` list in `/backend/settings.py`
-2. Replace `baseURL` variable with your IP and port in: `/frontend/src/apiServices.js` and `DindaroloMobile/components/apiServices.js`
-3. `cd frontend/ && npm run build` to update changes
-
+    1. Add your IP to `ALLOWED_HOSTS` list in `/backend/settings.py`
+    2. Replace `baseURL` variable with your IP and port in: `/frontend/src/apiServices.js` and `DindaroloMobile/components/apiServices.js`
+    3. `cd frontend/ && npm run build` to update changes
+- Start mobile: `cd DindaroloMobile/` && `npm run android`
+- (optional) some tests available: `python3 manage.py test api`
 ## Project specs agreed
 
 - Each user should be registered to obtain an access to the portal.
@@ -42,10 +44,10 @@ Applicazioni Web e Mobile Project - UNIMORE
 - Nobody which is not authenticated can't interact with the portal.
 
 - Authentication with JWT:	
-    - register account posting `username`, `email`(UNIQUE), `password`, `password2` at `/jwt_auth/register/`.
-    - login (if account available) posting `username` and `password` at: `/api/token/`.
-	- Both login and register returns an `Access Token`(valid for 5 minutes) and a `Refresh token`(valid for 24h).
-
+    - Register account: post `username`(UNIQUE), `email`(UNIQUE), `password`, `password2` at `/jwt_auth/register/`.
+    - Login (if account available): post `username` and `password` at `/api/token/`.
+	- Both login and register returns an `Access Token`(valid for 5 minutes) and a `Refresh Token`(valid for 24h).
+    - Logout blacklisting refresh token: post `Refresh Token` at `/jwt_auth/blacklist`
 
 
 - Add product:			
@@ -56,9 +58,9 @@ Each user can add a product (and gain a credit), putting `name`, `description`, 
     
 	    - `new_quantity_available` = `previous_quantity_available` + `quantity_inserted`.
 	
-	    - new unit price for product will be weighted:  ((`previous unit_price` * `previous quantity`) + (`new unit_price` * `new_quantity`)) / `total_quantity`)
+	    - new unit price for product will be:  ((`previous unit_price` * `previous quantity`) + (`new unit_price` * `new_quantity`)) / `new_quantity_available`)
 
-	    - `new_budget_available` for user: `old_budget _available` + (`quantity` * `unit_price`)
+	    - `new_budget_available` for user: `old_budget _available` + (`quantity_inserted` * `unit_price`)
 
 
 
@@ -69,7 +71,7 @@ Each user can add a product (and gain a credit), putting `name`, `description`, 
 
 - View list of all products available inserted by users:
 
-    - GET at `/api/products/` 	=> return: `product_name`, `description`, `quantity_available`, `weighted unit_price` 
+    - GET at `/api/products/` 	=> return: `product_name`, `description`, `quantity_available`, `unit_price` 
 
 - View History of transactions made by an user, positive and negative:
     - GET `/api/transactions/`   => return: list of `product name`, `quantity`, `unit_price`, `subtotal`, `currency`, `date of transaction`, `type of transaction`(positive or negative transaction)

@@ -128,3 +128,10 @@
     border: none;
     margin-top: 15px;
 }
+
+.register_line{
+    color:white;
+    border: 1px solid #383838;
+    width: 90%;
+    margin: 10px auto;
+}

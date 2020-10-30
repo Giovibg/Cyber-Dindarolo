@@ -70,7 +70,7 @@ class Register extends Component{
                         <input className="submit" type="submit" value= "SIGN UP" />
                     </form>
                 </div>
-                
+                <hr className="register_line" />
                
             </div>
             

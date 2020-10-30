@@ -98,7 +98,7 @@ class DindaroloTest(APITestCase):
         }
         response = self.client.put(url,data)
         
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         
     def test_TransactionQuantityOver(self):
         #Make a transaction with quantity choosen higher than available
@@ -115,7 +115,7 @@ class DindaroloTest(APITestCase):
         #Blacklist refresh token
         url = 'http://localhost:8000/jwt_auth/blacklist/'
         data = {
-            "refresh_token":self.refresh
+            "refresh_token":str(self.refresh)
         }
-        response = self.client.put(url,data)
+        response = self.client.post(url,data)
         self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)        

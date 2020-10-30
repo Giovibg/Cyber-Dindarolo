@@ -58,9 +58,9 @@ Each user can add a product (and gain a credit), putting `name`, `description`, 
     
 	    - `new_quantity_available` = `previous_quantity_available` + `quantity_inserted`.
 	
-	    - new unit price for product will be:  ((`previous unit_price` * `previous quantity`) + (`new unit_price` * `new_quantity`)) / `new_quantity_available`)
+	    - `new unit price` =  ((`previous unit_price` * `previous quantity`) + (`new unit_price` * `new_quantity`)) / `new_quantity_available`)
 
-	    - `new_budget_available` for user: `old_budget _available` + (`quantity_inserted` * `unit_price`)
+	    - `new_budget_available` for user = `old_budget _available` + (`quantity_inserted` * `unit_price`)
 
 
 

@@ -25,7 +25,7 @@ class ProductViewSet(APIView):
     def put(self, request):
         product_serializer = ProductSerializer(data=request.data)
         if product_serializer.is_valid():
-           
+            product_serializer.validated_data['name'] = product_serializer.validated_data['name'].capitalize()
             #Get back old budget for user
             try:
                 budget = Budget.objects.get(user=self.request.user)
@@ -49,7 +49,7 @@ class ProductViewSet(APIView):
             #print("budget", old_budget)
 
             #Check if product already exists
-            name = request.data['name']
+            name = product_serializer.validated_data['name']
             products = Product.objects.all()
             for prod in products:
                 if prod.name == name:
@@ -71,15 +71,16 @@ class ProductViewSet(APIView):
                     t.save()
                     response = {'message': 'product modified'}
                     return Response(response, status=status.HTTP_200_OK)
+            product_serializer.validated_data['name'] = product_serializer.validated_data['name'].capitalize()
+            #Add new product
 
-            #Add product
             product_serializer.save()
             prod = Product.objects.get(name=product_serializer.validated_data['name'])
             #print("prodotto:",prod)
+            #Update history
             t = Transaction.objects.create(owner=self.request.user, product=prod, unit_price=product_serializer.validated_data['unit_price'], quantity=product_serializer.validated_data['quantity'], subtotal=(product_serializer.validated_data['quantity']* product_serializer.validated_data['unit_price'] ))
             t.save()
 
-            #Update history
             response = {'message': 'product added'}
             return Response(response, status=status.HTTP_201_CREATED)
         return Response(product_serializer.errors,status=status.HTTP_400_BAD_REQUEST)

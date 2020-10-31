@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import "./Dashboard.css"
 import Sidebar from "./Sidebar"
 import Body from "./Body"
-import Products from './Products'
-import History from "./History"
-import { HashRouter, Route , Switch} from 'react-router-dom'
 import Generics from "../Generics"
 class Dashboard extends Component{
     

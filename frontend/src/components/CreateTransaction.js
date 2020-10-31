@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import "./CreateTransaction.css"
-import axios from 'axios'
 import APIrequest from '../apiServices'
 import Select from 'react-select'
-import Header from './Header'
-import Generics from "../Generics"
 class CreateTransaction extends Component{
     constructor(props){
         super(props);
@@ -120,6 +117,7 @@ class CreateTransaction extends Component{
                             />
                         </div>
                         <div className="errors">{ this.state.errors.product ? this.state.errors.product : null}</div>
+                        
                         Quantity
                         <input className="quantity" type="number" name="quantity" min="1" placeholder="Quantity" value={this.state.quantity} onChange={this.handleChange}/>
                         {this.state.unit_price > 0 && ( <div>{this.state.unit_price}€ each </div>)}
@@ -127,6 +125,7 @@ class CreateTransaction extends Component{
                         <div className="errors">{this.state.errors.quantity ? this.state.errors.quantity : null}</div>
         
                         <input className="submit" type="submit" value= "Buy" onEnded={this.props.action}/>
+                        
                         <div className="errors">{ this.state.errors.message ? this.state.errors.message : null}</div>
                         <div className="created">{ this.state.message.message ? this.state.message.message : null}</div>
                     </form>

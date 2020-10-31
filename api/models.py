@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
-# Create your models here.
 
 class Product(models.Model):
     name = models.CharField(max_length=30)
@@ -11,8 +10,10 @@ class Product(models.Model):
     unit_price = models.FloatField(default=0.01, validators=[MinValueValidator(0.01)])
     def __str__(self):
         return f'{self.name}'
+        
     class Meta:
         ordering = ['name']
+
 class Transaction(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     product = models.ForeignKey('Product', related_name='transactions', on_delete=models.DO_NOTHING)

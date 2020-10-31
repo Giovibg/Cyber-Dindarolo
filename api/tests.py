@@ -85,7 +85,6 @@ class DindaroloTest(APITestCase):
             "quantity":9
         }
         response = self.client.put(url,data)
-        
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
     
     def test_makeTransaction(self):
@@ -97,7 +96,6 @@ class DindaroloTest(APITestCase):
             "quantity":3
         }
         response = self.client.put(url,data)
-        
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         
     def test_TransactionQuantityOver(self):

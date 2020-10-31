@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import "./Login.css"
 import { Link } from 'react-router-dom'
 import APIrequest from "../apiServices"
-import Body from "./Body"
 import Generics from "../Generics"
 class Login extends Component{
     constructor(props){
@@ -41,12 +40,13 @@ class Login extends Component{
                 window.location.href = "/#/home/";
                
                 return response;
-            }catch (error){
-                console.log(error.response.data);
-                this.setState({errors:error.response.data});
-            }
+        }catch (error){
+            console.log(error.response.data);
+            this.setState({errors:error.response.data});
+        }
             
     } 
+    
     componentDidMount(){
         if(Generics.isAuthenticated()){
             window.location.href = "/#/home/";

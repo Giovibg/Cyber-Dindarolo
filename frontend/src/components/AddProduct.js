@@ -16,49 +16,48 @@ class AddProduct extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   async handleSubmit(event) {
     event.preventDefault();
     try {
-            const response =  await APIrequest.put('/api/products/', {
-            name: this.state.name_prod,
-            description: this.state.description,
-            unit_price: this.state.unit_price,
-            quantity: this.state.quantity
-        });
-        console.log("response:", response)
-        this.setState({message : response.data});
-        return response;
+      const response =  await APIrequest.put('/api/products/',{
+        name: this.state.name_prod,
+        description: this.state.description,
+        unit_price: this.state.unit_price,
+        quantity: this.state.quantity
+      });
+      console.log("response:", response)
+      this.setState({message : response.data});
+      return response;
     } catch (error) {
-        console.log(error.response);
-    this.setState({
-        errors:error.response.data
-    });
+      console.log(error.response);
+    this.setState({errors:error.response.data});
     }
     
-    }
+  }
 
-    handleChange(event){
-        this.setState({[event.target.name]: event.target.value});
-        this.setState({errors:{}});
-        this.setState({message:{}});
-    }
+  handleChange(event){
+    this.setState({[event.target.name]: event.target.value});
+    this.setState({errors:{}});
+    this.setState({message:{}});
+  }
+
   componentDidMount(){
     this.dialogWithCallBacks.show();
   }
 
   render(){
     var modalStyle = {
-        backgroundColor: '#282828',
-        opacity:'0.95',
-        color: '#ffffff',
-        width: '35%',
-        height: '600px',
-        marginTop: '-300px',
-        marginLeft: '-10%',
-        padding: '50px',
-        position: 'fixed'
-        
-      };
+      backgroundColor: '#282828',
+      opacity:'0.95',
+      color: '#ffffff',
+      width: '35%',
+      height: '600px',
+      marginTop: '-300px',
+      marginLeft: '-10%',
+      padding: '50px',
+      position: 'fixed'
+    };
 
     return(
         <SkyLight  dialogStyles={modalStyle}

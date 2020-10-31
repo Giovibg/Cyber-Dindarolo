@@ -32,9 +32,7 @@ class Products extends Component {
     }
     
     handleClick() { 
-        
         this.setState({
-            
             create: !this.state.create
         });
     }
@@ -49,9 +47,7 @@ class Products extends Component {
         this.props.action();
       }
     componentDidMount(){
-        
         this.getMessage();
-
     }
 
     render(){
@@ -64,7 +60,8 @@ class Products extends Component {
 
                     <Fab color="secondary" 
                      aria-label="add"onClick={() => this.handleClick()} 
-                     className="add_btn"><AddIcon /></Fab>
+                     className="add_btn"><AddIcon />
+                    </Fab>
                 </div>
 
                 <div className="productRow">

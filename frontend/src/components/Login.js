@@ -41,7 +41,7 @@ class Login extends Component{
                
                 return response;
         }catch (error){
-            console.log(error.response.data);
+            //console.log(error.response.data);
             this.setState({errors:error.response.data});
         }
             

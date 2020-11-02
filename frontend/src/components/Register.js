@@ -23,7 +23,7 @@ class Register extends Component{
 
     async handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state.username, this.state.password, this.state.confirm_password, this.state.email)
+        //console.log(this.state.username, this.state.password, this.state.confirm_password, this.state.email)
         try {
                 localStorage.setItem('access_token', null);
                 localStorage.setItem('refresh_token', null);
@@ -43,7 +43,7 @@ class Register extends Component{
             return response;
 
         } catch (error) {
-            console.log(error.response.data);
+            //console.log(error.response.data);
             this.setState({
                 errors:error.response.data
             });

@@ -26,15 +26,15 @@ class CreateTransaction extends Component{
         this.setState({[event.target.name]: event.target.value});
         this.setState({errors:{}})
         this.setState({message:{}})
-        console.log(`option selected: `, this.state.product_name)
+        //console.log(`option selected: `, this.state.product_name)
     }
 
     stateChange_p = product_name =>{
-        console.log(product_name)
+        //console.log(product_name)
         this.setState({product_id:product_name.value})
         this.setState({product_name:product_name.label})
         this.setState({unit_price:product_name.unit_price})
-        console.log("unit price", product_name.unit_price);
+        //console.log("unit price", product_name.unit_price);
         this.setState({errors:{}})
         this.setState({message:{}})
     }
@@ -49,13 +49,13 @@ class CreateTransaction extends Component{
                 quantity:this.state.quantity
                 
             });
-            console.log("res:",response.data.message)
+            //console.log("res:",response.data.message)
             this.setState({message : response.data});
             this.setState({update_budget: true})
             this.props.action();
             return response;
         } catch (error) {
-            console.log(error.response.data);
+            //console.log(error.response.data);
         this.setState({
             errors:error.response.data
         });
@@ -66,13 +66,13 @@ class CreateTransaction extends Component{
         try {
             let response = await APIrequest.get('/api/products/');
             const message = response.data;
-            console.log(message)
+            //console.log(message)
             this.setState({
                 list_product: message
             });
             return message;
         }catch(error){
-            console.log("Product error: ", JSON.stringify(error, null, 4));
+            //console.log("Product error: ", JSON.stringify(error, null, 4));
         }
     }
     

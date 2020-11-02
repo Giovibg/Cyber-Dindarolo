@@ -21,7 +21,7 @@ class History extends Component {
     try {
       let response = await APIrequest.get('/api/transactions/');
       const message = response.data;
-      console.log(message)
+      //console.log(message)
       this.setState({
         transactions: message,
       });
@@ -38,7 +38,7 @@ class History extends Component {
     
 
   handleClick(val) {
-    console.log(val.product_name); 
+    //console.log(val.product_name); 
     this.setState({
       detail: !this.state.detail,
       single_transaction: val

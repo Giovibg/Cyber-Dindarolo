@@ -21,13 +21,13 @@ class Products extends Component {
         try {
             let response = await APIrequest.get('/api/products/');
             const message = response.data;
-            console.log(message)
+            //console.log(message)
             this.setState({
                 products: message,
             });
             return message;
         }catch(error){
-            console.log("Product error: ", JSON.stringify(error, null, 4));
+            //console.log("Product error: ", JSON.stringify(error, null, 4));
         }
     }
     

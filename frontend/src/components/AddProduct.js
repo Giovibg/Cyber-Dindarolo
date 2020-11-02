@@ -26,11 +26,11 @@ class AddProduct extends Component {
         unit_price: this.state.unit_price,
         quantity: this.state.quantity
       });
-      console.log("response:", response)
+      //console.log("response:", response)
       this.setState({message : response.data});
       return response;
     } catch (error) {
-      console.log(error.response);
+      //console.log(error.response);
     this.setState({errors:error.response.data});
     }
     

@@ -3,6 +3,8 @@
 Applicazioni Web e Mobile Project - UNIMORE
 Giovanni Bagnoli - 205960@studenti.unimore.it
 
+**This is the Backend and Web frontend part. Mobile Application for Android is available [here](https://github.com/Giovibg/Cyber-Dindarolo-Mobile/)**
+
 ## Requirements
 
 - Python3
@@ -17,18 +19,21 @@ Giovanni Bagnoli - 205960@studenti.unimore.it
 - `/api`: API management.
 - `/jwt_auth`: JWT authentication management.
 - `/frontend`: Web frontend developed with React
-- `/mobile/DindaroloMobile`: Native app for Android developed with React Native
+- `DindaroloMobile`: Native app for Android developed with React Native
 
 ## Start Web and Mobile Project
 
 - (optional) Create python3 venv
 - Install requirements: `pip install -r requirements.txt`
-- Run Server: `python3 manage.py runserver <IP:port>` (default localhost:8000)
+- Run Server: `python3 manage.py runserver <IP:port>` 
 - If Server IP different from default: 
     1. Add your IP to `ALLOWED_HOSTS` list in `/backend/settings.py`
     2. Replace `baseURL` variable with your IP and port in: `/frontend/src/apiServices.js` and `DindaroloMobile/components/apiServices.js`
     3. `cd frontend/ && npm run build` to update changes
-- Start mobile: `cd DindaroloMobile/` && `npm run android`
+- Start mobile: 
+    1. `cd DindaroloMobile/`
+    2. `npm install`
+    3. `npm run android` 
 - (optional) some tests available: `python3 manage.py test api`
 ## Project specs agreed
 

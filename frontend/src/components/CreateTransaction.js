@@ -13,7 +13,8 @@ class CreateTransaction extends Component{
             errors:{},
             list_product: [],
             update_budget: false,
-            message: {}
+            message: {},
+            available: null
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -30,11 +31,10 @@ class CreateTransaction extends Component{
     }
 
     stateChange_p = product_name =>{
-        //console.log(product_name)
         this.setState({product_id:product_name.value})
         this.setState({product_name:product_name.label})
         this.setState({unit_price:product_name.unit_price})
-        //console.log("unit price", product_name.unit_price);
+        this.setState({available:product_name.available})
         this.setState({errors:{}})
         this.setState({message:{}})
     }
@@ -111,7 +111,7 @@ class CreateTransaction extends Component{
                             <Select className="selection"
                                 value={this.state.product_name}
                                 onChange={this.stateChange_p}
-                                options={this.state.list_product.map(t=> ({value: t.id, label: t.name, unit_price: t.unit_price}))}
+                                options={this.state.list_product.map(t=>({value: t.id, label: t.name, unit_price: t.unit_price, available: t.quantity}))}
                                 placeholder={this.state.product_name}
                                 styles={customStyles}
                             />
@@ -121,7 +121,8 @@ class CreateTransaction extends Component{
                         Quantity
                         <input className="quantity" type="number" name="quantity" min="1" placeholder="Quantity" value={this.state.quantity} onChange={this.handleChange}/>
                         {this.state.unit_price > 0 && ( <div>{this.state.unit_price}€ each </div>)}
-                         
+                        {this.state.available > 0 && (<div>{this.state.available} pcs available</div>)}
+                        {this.state.available == 0 && (<div>Out of Stock</div>)}
                         <div className="errors">{this.state.errors.quantity ? this.state.errors.quantity : null}</div>
         
                         <input className="submit" type="submit" value= "Buy" onEnded={this.props.action}/>

@@ -20,13 +20,13 @@ class Body extends Component{
         try {
             let response = await APIrequest.get('/api/budget/');
             const message = response.data;
-            console.log("message:",message.budget)
+            //console.log("message:",message.budget)
             this.setState({
                 budget: message.budget,
             });
             return message;
         }catch(error){
-            console.log("Budget error: ", JSON.stringify(error, null, 4)); 
+            //console.log("Budget error: ", JSON.stringify(error, null, 4)); 
         }
     }
 

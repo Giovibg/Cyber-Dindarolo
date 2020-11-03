@@ -26,7 +26,7 @@ def registration(request):
             "refresh": str(refresh),
             "access": str(refresh.access_token)
         }
-        print(res)
+        #print(res)
         return Response(res, status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)

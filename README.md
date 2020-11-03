@@ -85,5 +85,13 @@ Each user can add a product (and gain a credit), putting `name`, `description`, 
     - GET `/api/budget` => return `user_id`, `budget available`
 
 
+# Web Frontend Screenshots
 
+<img src="readme_img/login.png" width="500"> 
+<img src="readme_img/register.png" width="500">
+<img src="readme_img/buy.png" width="500"> 
+<img src="readme_img/list_product.png" width="500">
+<img src="readme_img/add_product.png" width="500">
+<img src="readme_img/history.png" width="500"> 
+<img src="readme_img/detail_history.png" width="500">
 

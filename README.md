@@ -25,8 +25,9 @@ Giovanni Bagnoli - 205960@studenti.unimore.it
 
 - (optional) Create python3 venv
 - Install requirements: `pip install -r requirements.txt`
-- Run Server: `python3 manage.py runserver <IP:port>` 
-- If Server IP different from default: 
+- Run Server: `python3 manage.py runserver <IP:port>`
+- Install Frontend modules: `cd frontend/ && npm install` 
+- Make available IP and port choosen to requests: 
     1. Add your IP to `ALLOWED_HOSTS` list in `/backend/settings.py`
     2. Replace `baseURL` variable with your IP and port in: `/frontend/src/apiServices.js` and `DindaroloMobile/components/apiServices.js`
     3. `cd frontend/ && npm run build` to update changes

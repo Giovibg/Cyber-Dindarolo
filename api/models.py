@@ -27,6 +27,6 @@ class Transaction(models.Model):
         ordering = ['-transaction_timestamp']
 
 class Budget(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     budget = models.FloatField(default=0.00)
 
